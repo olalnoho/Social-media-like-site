@@ -1,0 +1,542 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap");
+.landing {
+  color: white;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-color: #0b0314;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.landing__left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.landing__buttongroup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.landing__buttongroup a {
+  text-align: center;
+  letter-spacing: 1px;
+  border: .3rem solid #bbb4b7;
+  color: white;
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  font-family: inherit;
+}
+
+.header {
+  color: white;
+  font-size: 1.5rem;
+  background-color: #220820;
+  padding: 1rem;
+  border-bottom: 0.1rem solid blanchedalmond;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header__info {
+  margin-left: 3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header__info h2 {
+  letter-spacing: 3px;
+}
+
+.header__info i {
+  margin-right: 3rem;
+  font-size: 4.4rem;
+}
+
+.header__nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 2rem;
+}
+
+.header__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.header__list--item:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.header__list--item {
+  cursor: pointer;
+}
+
+.header__list--links {
+  padding: 0.3rem;
+  border-bottom: 2px solid transparent;
+}
+
+.header button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.heading-1 {
+  font-size: 6rem;
+  margin-bottom: 2rem;
+}
+
+.heading-2 {
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+}
+
+.lead {
+  font-size: 1.6rem;
+}
+
+.btn {
+  color: white;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 0.7rem 2rem;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.btn--primary {
+  background-color: #136d3a;
+}
+
+.btn--primary:hover {
+  background-color: #116435;
+}
+
+.btn--secondary {
+  background-color: #798c9f;
+}
+
+.btn--secondary:hover {
+  background-color: #607385;
+}
+
+.btn--thirdary {
+  background-color: #220820;
+}
+
+.btn:active {
+  -webkit-transform: translateY(2px);
+          transform: translateY(2px);
+}
+
+.container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-color: #0b0314;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.flexcenter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.flexcolumn {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 40%;
+  font-size: 1.6rem;
+  padding: 2rem;
+  border: 0.2rem solid blanchedalmond;
+  background-color: #160a24;
+}
+
+.form input[type="text"],
+.form input[type="password"],
+.form input[type="email"] {
+  font-family: inherit;
+  padding: 1rem 0;
+  font-size: 2rem;
+  width: 100%;
+  color: white;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 0.2rem solid blanchedalmond;
+  margin-bottom: 3rem;
+}
+
+.form input[type="text"]::-webkit-input-placeholder,
+.form input[type="password"]::-webkit-input-placeholder,
+.form input[type="email"]::-webkit-input-placeholder {
+  color: white;
+}
+
+.form input[type="text"]:-ms-input-placeholder,
+.form input[type="password"]:-ms-input-placeholder,
+.form input[type="email"]:-ms-input-placeholder {
+  color: white;
+}
+
+.form input[type="text"]::-ms-input-placeholder,
+.form input[type="password"]::-ms-input-placeholder,
+.form input[type="email"]::-ms-input-placeholder {
+  color: white;
+}
+
+.form input[type="text"]::placeholder,
+.form input[type="password"]::placeholder,
+.form input[type="email"]::placeholder {
+  color: white;
+}
+
+.form input[type="submit"] {
+  font-size: 1.6rem;
+  border: 0.2rem solid blanchedalmond;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  display: block;
+}
+
+.formheader {
+  margin-bottom: 0;
+  text-align: center;
+  padding: 2rem;
+  width: 40%;
+  border: 0.2rem solid blanchedalmond;
+  border-bottom: none;
+  background-color: #220820;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.formheader i {
+  font-size: 5rem;
+  margin-right: 3rem;
+}
+
+.alert {
+  color: crimson;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+}
+
+.active {
+  border-bottom: 2px solid orangered;
+}
+
+.profile,
+.profilecreation {
+  background-color: #0b0314;
+  padding: 1rem;
+  border: 0.2rem solid blanchedalmond;
+  display: -ms-grid;
+  display: grid;
+  margin: 3rem auto;
+}
+
+.profile {
+  width: 80%;
+  -ms-grid-columns: 20rem 10rem 1fr;
+      grid-template-columns: 20rem 10rem 1fr;
+  -ms-grid-rows: 20rem 1fr;
+      grid-template-rows: 20rem 1fr;
+  gap: 1rem;
+}
+
+.profile__image {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1/3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile .avatar {
+  height: 80%;
+  border-radius: 10%;
+}
+
+.profile__heading {
+  background-color: #0b0314;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 1;
+  grid-column: 3/4;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.profile__heading--name {
+  text-align: center;
+  font-size: 4rem;
+}
+
+.profile__heading a {
+  font-size: 1.4rem;
+}
+
+.profile__bio {
+  white-space: pre-wrap;
+  background-color: #160a24;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1/3;
+  padding-top: 3rem;
+  padding-left: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.profile__bio--item {
+  margin: 0 auto;
+  line-height: 2.2rem;
+  width: 80%;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.profile__bio--item label {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  display: block;
+  font-size: 1.4rem;
+}
+
+.profile__posts {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  grid-column: 3/-1;
+  background-color: #160a24;
+}
+
+.profilecreation {
+  width: 60%;
+  -ms-grid-rows: 15rem 1fr;
+      grid-template-rows: 15rem 1fr;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+.profilecreation .form {
+  width: 94%;
+  margin: auto;
+  grid-column: 1/-1;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+}
+
+.profilecreation .form textarea {
+  padding: 1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  background-color: transparent;
+  color: white;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+.profilecreation .form textarea::-webkit-input-placeholder {
+  color: white;
+  font-size: inherit;
+}
+
+.profilecreation .form textarea:-ms-input-placeholder {
+  color: white;
+  font-size: inherit;
+}
+
+.profilecreation .form textarea::-ms-input-placeholder {
+  color: white;
+  font-size: inherit;
+}
+
+.profilecreation .form textarea::placeholder {
+  color: white;
+  font-size: inherit;
+}
+
+.profilecreation h2 {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.profilecreation p {
+  text-align: center;
+}
+
+.messageboard {
+  width: 70%;
+  margin: 2rem auto;
+}
+
+.messageboard .form {
+  background-color: #0b0314;
+  border: none;
+  margin: auto;
+  width: 80%;
+}
+
+.messageboard .form input {
+  width: 60%;
+  -webkit-transition: width .3s ease-out;
+  transition: width .3s ease-out;
+}
+
+.messageboard .form input:focus {
+  width: 100%;
+}
+
+.messageboard__messages {
+  margin-top: 5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: Ubuntu, sans-serif;
+  color: white;
+}
+
+#root {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100vh;
+}
+
+ul {
+  list-style: none;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+  -webkit-transition: border .2s;
+  transition: border .2s;
+}

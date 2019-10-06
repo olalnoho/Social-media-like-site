@@ -1,0 +1,21 @@
+{
+  "name": "bettersmn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "env-cmd -f ./config/dev.env nodemon index.js",
+    "dev": "env-cmd -f ./config/dev.env concurrently \"nodemon index.js\" \"npm start --prefix client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.9.4",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^4.1.2",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.19.4",
+    "pg": "^7.12.1"
+  }
+}

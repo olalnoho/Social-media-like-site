@@ -1,0 +1,52 @@
+.header {
+  color: white;
+  font-size: 1.5rem;
+  background-color: $header-color;
+  padding: 1rem;
+  border-bottom: 0.1rem solid blanchedalmond;
+  display: flex;
+  justify-content: space-between;
+
+  &__info {
+    margin-left: 3rem;
+    display: flex;
+    align-items: center;
+    h2 {
+      letter-spacing: 3px;
+    }
+    i {
+      margin-right: 3rem;
+      font-size: 4.4rem;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+  }
+  &__list {
+    display: flex;
+    &--item:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &--item {
+      cursor: pointer;
+    }
+
+    &--links {
+      padding: 0.3rem;
+      border-bottom: 2px solid transparent;
+    }
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: inherit;
+    font-size: inherit;
+  }
+}

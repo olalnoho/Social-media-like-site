@@ -1,0 +1,114 @@
+// Shared styles
+.profile,
+.profilecreation {
+  background-color: $main-bg;
+  padding: 1rem;
+  border: 0.2rem solid blanchedalmond;
+  display: grid;
+  margin: 3rem auto;
+}
+
+.profile {
+  width: 80%;
+  // 20rem for avatar-size
+  grid-template-columns: 20rem 10rem 1fr;
+  grid-template-rows: 20rem 1fr;
+  gap: 1rem;
+
+  &__image {
+    grid-row: 1/2;
+    grid-column: 1/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .avatar {
+    height: 80%;
+    border-radius: 10%;
+  }
+
+  &__heading {
+    background-color: $main-bg;
+    grid-row: 1/2;
+    grid-column: 3/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    &--name {
+      text-align: center;
+      font-size: 4rem;
+    }
+
+    a {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__bio {
+    white-space: pre-wrap;
+    background-color: $main-lighter;
+    grid-row: 2/3;
+    grid-column: 1/3;
+    padding-top: 3rem;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    &--item {
+      margin: 0 auto;
+      line-height: 2.2rem;
+      width: 80%;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      label {
+        margin-bottom: 1rem;
+        font-weight: 700;
+        display: block;
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  &__posts {
+    grid-row: 2/3;
+    grid-column: 3/-1;
+    background-color: $main-lighter;
+  }
+}
+
+.profilecreation {
+  width: 60%;
+  grid-template-rows: 15rem 1fr;
+  grid-template-columns: 1fr;
+
+  .form {
+    width: 94%;
+    margin: auto;
+    grid-column: 1/-1;
+    grid-row: 2/3;
+    textarea {
+      padding: 1rem;
+      width: 100%;
+      margin-bottom: 2rem;
+      background-color: transparent;
+      color: white;
+      font-family: inherit;
+      font-size: inherit;
+      outline: none;
+      &::placeholder {
+        color: white;
+        font-size: inherit;
+      }
+    }
+  }
+  h2 {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  p {
+    text-align: center;
+  }
+}
