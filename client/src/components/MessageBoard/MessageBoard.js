@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import messageQuery from '../../queries/getMessages'
 import messageMutation from '../../queries/createMessage'
 
+import Spinner from '../UI/Spinner/Spinner'
+
 const MessageBoard = () => {
    const [messageText, setMessageText] = useState('')
    const [sendMessage, { loading: sendLoading, error: sendError }] = useMutation(messageMutation)
@@ -37,7 +39,9 @@ const MessageBoard = () => {
                   required
                   onChange={e => setMessageText(e.target.value)} />
                <input type="submit" className="btn btn--primary" value="Send message" />
+               {(messageLoading || sendLoading) && <Spinner />}
             </form>
+            {(sendError || messageError) && <div className="alert" style={{ textAlign: 'center' }}> Something went wrong, try again.</div>}
             <div className="messageboard__messages">
                {messages.getMessages.map(msg => {
                   return <div key={msg.mid} className="messageboard__messages--msg">

@@ -3,12 +3,17 @@
   margin: 2rem auto;
 
   .form {
+    display: grid;
+    grid-template-rows: min-content min-content;
+    grid-template-columns: 1fr min-content;
     background-color: $main-bg;
     border: none;
     margin: auto;
     width: 80%;
 
     input[type="text"] {
+      grid-row: 1/2;
+      grid-column: 1/2;
       width: 60%;
       transition: width 0.3s ease-out;
       &:focus {
@@ -17,7 +22,9 @@
     }
 
     input[type="submit"] {
-      margin: auto;
+      grid-row: 2/3;
+      grid-column: 1/-1;
+      width: 30%;
     }
   }
 
