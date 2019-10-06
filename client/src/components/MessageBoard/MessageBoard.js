@@ -13,7 +13,10 @@ const MessageBoard = () => {
       data: messages,
       loading: messageLoading,
       error: messageError,
-   } = useQuery(messageQuery, { fetchPolicy: 'network-only' })
+   } = useQuery(messageQuery, {
+      fetchPolicy: 'network-only',
+      pollInterval: 5000
+   })
 
    if (messageLoading) {
       return <div className="container flex" />
