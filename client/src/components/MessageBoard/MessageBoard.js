@@ -28,6 +28,8 @@ const MessageBoard = () => {
       })
    }
 
+   //{(messageLoading || sendLoading) && <Spinner />}
+
    return (
       <div className="container flex">
          <div className="messageboard">

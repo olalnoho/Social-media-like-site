@@ -500,6 +500,8 @@
 }
 
 .messageboard .form input[type="text"] {
+  -ms-grid-column-align: center;
+      justify-self: center;
   -ms-grid-row: 1;
   -ms-grid-row-span: 1;
   grid-row: 1/2;
@@ -516,11 +518,22 @@
 }
 
 .messageboard .form input[type="submit"] {
+  -ms-grid-column-align: center;
+      justify-self: center;
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2/3;
   grid-column: 1/-1;
   width: 30%;
+}
+
+.messageboard .form .Loader {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
 }
 
 .messageboard__messages {
@@ -583,10 +596,9 @@
 
 .Loader {
   font-size: 10px;
-  margin: 50px auto;
   text-indent: -9999em;
-  width: 5em;
-  height: 5em;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   background: #aa558c;
   background: -webkit-gradient(linear, left top, right top, color-stop(10%, #aa558c), color-stop(42%, rgba(170, 85, 140, 0)));

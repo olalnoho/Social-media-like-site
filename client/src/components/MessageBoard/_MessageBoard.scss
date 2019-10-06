@@ -12,6 +12,7 @@
     width: 80%;
 
     input[type="text"] {
+      justify-self: center;
       grid-row: 1/2;
       grid-column: 1/2;
       width: 60%;
@@ -22,9 +23,15 @@
     }
 
     input[type="submit"] {
+      justify-self: center;
       grid-row: 2/3;
       grid-column: 1/-1;
       width: 30%;
+    }
+
+    .Loader {
+      grid-row: 2/3;
+      grid-column: 2/3;
     }
   }
 
