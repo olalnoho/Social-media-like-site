@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
+import { AuthContext } from '../../context/AuthContext'
+import { Redirect } from 'react-router-dom'
 import query from '../../queries/getProfileById'
 
 const OtherProfile = props => {
    const { data, loading, error } = useQuery(query, { variables: { id: props.match.params.id } })
+   const { userDetails } = useContext(AuthContext)
 
    if (loading) {
       return <div className="container flex" />
@@ -15,6 +18,10 @@ const OtherProfile = props => {
             Profile does not exist
          </h2>
       </div>
+   }
+
+   if (data && userDetails.username === data.getProfileById.username) {
+      return <Redirect to="/profile" />
    }
 
    return (
