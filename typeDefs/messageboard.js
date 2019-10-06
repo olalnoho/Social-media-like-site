@@ -4,11 +4,18 @@ module.exports = gql`
 
    type Message {
       content: String!
-      user: User!
+   }
+
+   type FullPost {
+      username: String!
+      avatar: String!
+      content: String
+      pid: ID!
+      mid: ID!
    }
 
    extend type Query {
-      getMessages: [Message!]!
+      getMessages: [FullPost!]!
       getMessage: String!
    }
 
