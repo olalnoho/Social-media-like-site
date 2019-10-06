@@ -25,7 +25,7 @@ const MessageBoard = () => {
          variables: { content: messageText }, refetchQueries: () => {
             return [{ query: messageQuery }]
          }, awaitRefetchQueries: true
-      })
+      }).then(_ => setMessageText(''))
    }
 
    //{(messageLoading || sendLoading) && <Spinner />}
