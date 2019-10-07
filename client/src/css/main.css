@@ -549,9 +549,9 @@
   border: 0.2rem solid blanchedalmond;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: min-content 10rem max-content;
-      grid-template-rows: -webkit-min-content 10rem -webkit-max-content;
-      grid-template-rows: min-content 10rem max-content;
+  -ms-grid-rows: min-content 10rem min-content max-content;
+      grid-template-rows: -webkit-min-content 10rem -webkit-min-content -webkit-max-content;
+      grid-template-rows: min-content 10rem min-content max-content;
   -ms-grid-columns: 15rem 1fr;
       grid-template-columns: 15rem 1fr;
 }
@@ -592,6 +592,20 @@
   line-height: 2rem;
   grid-row: 1/-1;
   grid-column: 2/-1;
+}
+
+.messageboard__messages--msg button {
+  background-color: crimson;
+  margin: auto;
+  margin-top: 2rem;
+  width: 60%;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3/4;
+}
+
+.messageboard__messages--msg button:hover {
+  background-color: #960e29;
 }
 
 .Loader {

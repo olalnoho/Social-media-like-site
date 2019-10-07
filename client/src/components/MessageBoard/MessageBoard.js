@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
 import messageQuery from '../../queries/getMessages'
 import messageMutation from '../../queries/createMessage'
+import deleteMessageMutation from '../../queries/deleteMessage'
 
 import Spinner from '../UI/Spinner/Spinner'
 
 const MessageBoard = () => {
+   const { userDetails } = useContext(AuthContext)
    const [messageText, setMessageText] = useState('')
    const [sendMessage, { loading: sendLoading, error: sendError }] = useMutation(messageMutation)
+   const [deleteMessage, { loading: deleteLoading }] = useMutation(deleteMessageMutation)
    const {
       data: messages,
       loading: messageLoading,
@@ -31,7 +35,17 @@ const MessageBoard = () => {
       }).then(_ => setMessageText(''))
    }
 
-   //{(messageLoading || sendLoading) && <Spinner />}
+   const onDelete = id => {
+      console.log(id)
+      if (window.confirm('Are you sure you want to delete your message?')) {
+         deleteMessage({
+            variables: { id }, refetchQueries: () => {
+               return [{ query: messageQuery }]
+            }, awaitRefetchQueries: true
+         })
+      }
+   }
+
 
    return (
       <div className="container flex">
@@ -44,7 +58,7 @@ const MessageBoard = () => {
                   required
                   onChange={e => setMessageText(e.target.value)} />
                <input type="submit" className="btn btn--primary" value="Send message" />
-               {(messageLoading || sendLoading) && <Spinner />}
+               {(messageLoading || sendLoading || deleteLoading) && <Spinner />}
             </form>
             {(sendError || messageError) && <div className="alert" style={{ textAlign: 'center' }}> Something went wrong, try again.</div>}
             <div className="messageboard__messages">
@@ -57,6 +71,11 @@ const MessageBoard = () => {
                      <p className="lead">
                         {msg.content}
                      </p>
+                     {msg.username === userDetails.username &&
+                        <button
+                           onClick={e => onDelete(msg.mid)}
+                           className="btn btn--thirdary">Remove</button>
+                     }
                   </div>
                })}
             </div>

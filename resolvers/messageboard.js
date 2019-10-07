@@ -18,6 +18,20 @@ module.exports = {
             .insert({ user: id, content })
             .returning('*')
          return message[0]
+      },
+
+      async deleteMessage(parent, { id }, { req, db }) {
+         const userId = getUserId(req.req)
+         const msg = await db('message_board')
+            .delete()
+            .where({ id, user: userId })
+            .returning('*')
+
+         if (!msg.length) {
+            throw new Error('Message not found')
+         }
+
+         return msg[0]
       }
    }
 }
