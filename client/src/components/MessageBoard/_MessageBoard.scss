@@ -46,7 +46,7 @@
       min-height: 20rem;
       border: 0.2rem solid blanchedalmond;
       display: grid;
-      grid-template-rows: min-content 10rem max-content;
+      grid-template-rows: min-content 10rem min-content max-content;
       grid-template-columns: 15rem 1fr;
 
       img {
@@ -71,6 +71,17 @@
         line-height: 2rem;
         grid-row: 1/-1;
         grid-column: 2/-1;
+      }
+      button {
+        background-color: crimson;
+        margin: auto;
+        margin-top: 2rem;
+        width: 60%;
+        grid-row: 3/4;
+
+        &:hover {
+          background-color: darken(crimson, 15%);
+        }
       }
     }
   }

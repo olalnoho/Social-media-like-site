@@ -12,12 +12,29 @@ module.exports = {
    },
 
    Mutation: {
-      async createMessage(parent, { content }, { req, db }) {
+      async createMessage(parent, { content }, { req, db, io }) {
          const id = getUserId(req.req)
          const message = await db('message_board')
             .insert({ user: id, content })
             .returning('*')
+
+         io.emit('message_update')
          return message[0]
+      },
+
+      async deleteMessage(parent, { id }, { req, db, io }) {
+         const userId = getUserId(req.req)
+         const msg = await db('message_board')
+            .delete()
+            .where({ id, user: userId })
+            .returning('*')
+
+         if (!msg.length) {
+            throw new Error('Message not found')
+         }
+         
+         io.emit('message_update')
+         return msg[0]
       }
    }
 }

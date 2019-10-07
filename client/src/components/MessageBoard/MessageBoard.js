@@ -1,19 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { Link } from 'react-router-dom'
+import { SocketContext } from '../../context/SocketContext'
+import { AuthContext } from '../../context/AuthContext'
 import messageQuery from '../../queries/getMessages'
 import messageMutation from '../../queries/createMessage'
+import deleteMessageMutation from '../../queries/deleteMessage'
 
 import Spinner from '../UI/Spinner/Spinner'
 
 const MessageBoard = () => {
+   const { socket } = useContext(SocketContext)
+   const { userDetails } = useContext(AuthContext)
    const [messageText, setMessageText] = useState('')
    const [sendMessage, { loading: sendLoading, error: sendError }] = useMutation(messageMutation)
+   const [deleteMessage, { loading: deleteLoading }] = useMutation(deleteMessageMutation)
+
    const {
       data: messages,
       loading: messageLoading,
       error: messageError,
-   } = useQuery(messageQuery, { fetchPolicy: 'network-only' })
+      refetch,
+   } = useQuery(messageQuery, { fetchPolicy  : 'network-only' })
+
+
+   useEffect(() => {
+      socket.on('message_update', refetch)
+      return () => socket.off('message_update', refetch)
+   }, [refetch, socket])
 
    if (messageLoading) {
       return <div className="container flex" />
@@ -28,7 +42,11 @@ const MessageBoard = () => {
       }).then(_ => setMessageText(''))
    }
 
-   //{(messageLoading || sendLoading) && <Spinner />}
+   const onDelete = id => {
+      if (window.confirm('Are you sure you want to delete your message?')) {
+         deleteMessage({ variables: { id } })
+      }
+   }
 
    return (
       <div className="container flex">
@@ -41,7 +59,7 @@ const MessageBoard = () => {
                   required
                   onChange={e => setMessageText(e.target.value)} />
                <input type="submit" className="btn btn--primary" value="Send message" />
-               {(messageLoading || sendLoading) && <Spinner />}
+               {(messageLoading || sendLoading || deleteLoading) && <Spinner />}
             </form>
             {(sendError || messageError) && <div className="alert" style={{ textAlign: 'center' }}> Something went wrong, try again.</div>}
             <div className="messageboard__messages">
@@ -54,6 +72,11 @@ const MessageBoard = () => {
                      <p className="lead">
                         {msg.content}
                      </p>
+                     {msg.username === userDetails.username &&
+                        <button
+                           onClick={e => onDelete(msg.mid)}
+                           className="btn btn--thirdary">Remove</button>
+                     }
                   </div>
                })}
             </div>
