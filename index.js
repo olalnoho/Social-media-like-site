@@ -16,11 +16,7 @@ const server = new ApolloServer({
    playground: true,
    typeDefs,
    resolvers,
-   context: req => ({
-      req,
-      db,
-      io
-   })
+   context: req => ({ req, db, io })
 })
 
 server.applyMiddleware({ app })
