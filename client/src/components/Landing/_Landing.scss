@@ -36,5 +36,39 @@
     &__left {
       margin-bottom: 4rem;
     }
+    
+    &__right {
+      width: 40%;
+    }
+  }
+}
+
+@media only screen and(max-width:500px) {
+  .landing {
+    flex-direction: column;
+    justify-content: center;
+
+    &__left {
+      margin-bottom: 4rem;
+    }
+    
+    &__right {
+      width: 50%;
+    }
+  }
+}
+
+@media only screen and(max-width:400px) {
+  .landing {
+    flex-direction: column;
+    justify-content: center;
+
+    &__left {
+      margin-bottom: 4rem;
+    }
+    
+    &__right {
+      width: 70%;
+    }
   }
 }

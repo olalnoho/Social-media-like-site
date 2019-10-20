@@ -9,6 +9,8 @@ import deleteMessageMutation from '../../queries/deleteMessage'
 
 import Spinner from '../UI/Spinner/Spinner'
 
+const defaultAvatar = "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png"
+
 const MessageBoard = () => {
    const { socket } = useContext(SocketContext)
    const { userDetails } = useContext(AuthContext)
@@ -65,7 +67,8 @@ const MessageBoard = () => {
             <div className="messageboard__messages">
                {messages.getMessages.map(msg => {
                   return <div key={msg.mid} className="messageboard__messages--msg">
-                     {msg.avatar ? <img src={msg.avatar} alt="users avatar" /> : <span>No avatar</span>}
+                     {msg.avatar ? <img src={msg.avatar} alt="users avatar" /> : 
+                                   <img src={defaultAvatar} alt="users avatar" /> }
                      {msg.pid ? <Link to={`/profiles/${msg.pid}`}><h2>
                         {msg.username}
                      </h2></Link> : <h2>
