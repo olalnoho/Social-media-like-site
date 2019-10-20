@@ -8,9 +8,9 @@ module.exports = gql`
 
    type FullPost {
       username: String!
-      avatar: String!
+      avatar: String
       content: String
-      pid: ID!
+      pid: ID
       mid: ID!
    }
 

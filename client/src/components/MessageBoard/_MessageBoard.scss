@@ -48,7 +48,7 @@
       grid-template-rows: min-content 10rem min-content max-content;
       grid-template-columns: 15rem 1fr;
 
-      img {
+      img, span {
         justify-self: center;
         align-self: center;
         height: 100%;
@@ -57,9 +57,9 @@
         grid-column: 1/2;
       }
 
-      a {
+      a, h2 {
         justify-self: center;
-        padding: 1rem;
+        padding: .3rem;
         align-self: center;
         grid-row: 1/2;
         grid-column: 1/2;
@@ -80,6 +80,90 @@
 
         &:hover {
           background-color: darken(crimson, 15%);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width:1200px) {
+  .messageboard {
+    width: 80%;
+  }
+}
+
+@media only screen and(max-width:1000px) {
+  .messageboard {
+    width: 90%;
+  }
+}
+
+@media only screen and(max-width:800px) {
+  .messageboard {
+    width: 100%;
+    margin: 0;
+
+    &__messages {
+      margin-top: 5rem;
+
+      &--msg {
+        gap: 1rem;
+        margin: 2rem auto 5rem auto;
+        width: 90%;
+        padding: 1rem 0.5rem;
+        grid-template-rows: 8rem min-content min-content 1fr;
+        grid-template-columns: 1fr;
+
+        img, span {
+          grid-row: 1/2;
+          grid-column: 1/-1;
+        }
+
+        a, h2 {
+          justify-self: center;
+          padding: 0;
+          align-self: center;
+          grid-row: 2/3;
+          grid-column: 1/-1;
+        }
+        button {
+          grid-row: 3/4;
+          grid-column: 1/-1;
+          align-self: center;
+          justify-self: center;
+          margin: 0;
+          width: 20%;
+          margin-bottom: 2rem;
+        }
+
+        p {
+          width: 95%;
+          text-align: center;
+          grid-row: 4/5;
+          grid-column: 1/-1;
+          justify-self: center;
+          align-self: center;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and(max-width:500px) {
+  .messageboard {
+    width: 100%;
+    margin: 0;
+
+    &__messages {
+      margin-top: 5rem;
+
+      &--msg {
+        button {
+          width: 30%;
+        }
+        p {
+          padding: 0 1rem;
         }
       }
     }

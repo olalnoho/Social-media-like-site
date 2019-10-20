@@ -27,3 +27,14 @@
     }
   }
 }
+
+@media only screen and(max-width:1000px) {
+  .landing {
+    flex-direction: column;
+    justify-content: center;
+
+    &__left {
+      margin-bottom: 4rem;
+    }
+  }
+}

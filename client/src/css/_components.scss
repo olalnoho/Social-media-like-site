@@ -112,3 +112,53 @@
 .active {
   border-bottom: 2px solid orangered;
 }
+
+@media only screen and(max-width:1400px) {
+  .form {
+    width: 50%;
+  }
+  
+  .formheader {
+    width: 50%;
+  }
+}
+
+@media only screen and(max-width:1200px) {
+  .form {
+    width: 60%;
+  }
+  
+  .formheader {
+    width: 60%;
+  }
+}
+
+@media only screen and(max-width:800px) {
+  .form {
+    width: 70%;
+  }
+  
+  .formheader {
+    width: 70%;
+  }
+}
+
+@media only screen and(max-width:700px) {
+  .form {
+    width: 80%;
+  }
+  
+  .formheader {
+    width: 80%;
+  }
+}
+
+@media only screen and(max-width:600px) {
+  .form {
+    width: 90%;
+  }
+  
+  .formheader {
+    width: 90%;
+  }
+}

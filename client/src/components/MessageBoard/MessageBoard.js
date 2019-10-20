@@ -21,7 +21,7 @@ const MessageBoard = () => {
       loading: messageLoading,
       error: messageError,
       refetch,
-   } = useQuery(messageQuery, { fetchPolicy  : 'network-only' })
+   } = useQuery(messageQuery, { fetchPolicy: 'network-only' })
 
 
    useEffect(() => {
@@ -65,10 +65,12 @@ const MessageBoard = () => {
             <div className="messageboard__messages">
                {messages.getMessages.map(msg => {
                   return <div key={msg.mid} className="messageboard__messages--msg">
-                     <img src={msg.avatar} alt="users avatar" />
-                     <Link to={`/profiles/${msg.pid}`}><h2>
+                     {msg.avatar ? <img src={msg.avatar} alt="users avatar" /> : <span>No avatar</span>}
+                     {msg.pid ? <Link to={`/profiles/${msg.pid}`}><h2>
                         {msg.username}
-                     </h2></Link>
+                     </h2></Link> : <h2>
+                           {msg.username}
+                        </h2>}
                      <p className="lead">
                         {msg.content}
                      </p>

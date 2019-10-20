@@ -11,3 +11,17 @@
 .lead {
   font-size: 1.6rem;
 }
+
+@media only screen and(max-width:600px) {
+  .heading-1 {
+    font-size: 4rem;
+  }
+
+  .heading-2 {
+    font-size: 3rem;
+  }
+  
+  .lead {
+    font-size: 1.5rem;
+  }
+}
