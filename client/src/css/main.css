@@ -653,6 +653,7 @@
   .profilecreation, .profile {
     width: 100%;
     margin: 0;
+    margin-bottom: 3rem;
     border: none;
   }
 }
