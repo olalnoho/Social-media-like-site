@@ -59,7 +59,7 @@ const ProfileCreation = () => {
                <input
                   value={formData.avatar}
                   type="text"
-                  placeholder="URL to avatar you'd like to use   -   e.g. https://imagesite.com/picture2.jpeg"
+                  placeholder="URL to avatar you'd like to use"
                   onChange={e => setFormData({ ...formData, avatar: e.target.value })}
                />
                <textarea
