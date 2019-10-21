@@ -3,12 +3,13 @@ const getUserId = require('../utils/getUserId')
 module.exports = {
    Query: {
       async getMessages(parent, args, { db }) {
+
          // return db('message_board')
          //    .select('profile.avatar', 'users.username', 'message_board.content', 'profile.id as pid', 'message_board.id as mid')
          //    .join('users', 'message_board.user', 'users.id')
          //    .join('profile', 'profile.user', 'users.id')
          //    .orderBy('message_board.time_sent', 'desc')
-            // SELECT p.avatar, u.username, m.content, p.id as pid, m.id as mid FROM message_board m LEFT JOIN users u on m.user = u.id LEFT JOIN profile p ON p.user = u.id;
+
          const res = await db.raw(`
             SELECT 
                p.avatar, u.username, m.content, p.id as pid, m.id as mid 
@@ -17,6 +18,7 @@ module.exports = {
             LEFT JOIN profile p ON p.user = u.id
             ORDER BY m.time_sent DESC;
             `)
+            
          return res.rows
          
       }
