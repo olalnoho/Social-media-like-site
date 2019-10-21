@@ -12,9 +12,9 @@ module.exports = {
 
          const res = await db.raw(`
             SELECT 
-               p.avatar, u.username, m.content, p.id as pid, m.id as mid 
+               p.avatar, u.username, m.content, p.id AS pid, m.id AS mid 
             FROM message_board m 
-            LEFT JOIN users u on m.user = u.id 
+            LEFT JOIN users u ON m.user = u.id 
             LEFT JOIN profile p ON p.user = u.id
             ORDER BY m.time_sent DESC;
             `)
