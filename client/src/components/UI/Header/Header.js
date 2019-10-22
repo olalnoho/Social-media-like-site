@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 import { AuthContext } from '../../../context/AuthContext'
+import { SocketContext } from '../../../context/SocketContext'
 import { useApolloClient } from '@apollo/react-hooks'
 const Header = ({ authLoading, ...router }) => {
    const client = useApolloClient()
-   const { isAuth, setIsAuth, setUserDetails } = useContext(AuthContext)
+   const { isAuth, setIsAuth, setUserDetails, userDetails } = useContext(AuthContext)
+   const { socket } = useContext(SocketContext)
    let links = (
       <>
          <li className="header__list--item">
@@ -32,6 +34,9 @@ const Header = ({ authLoading, ...router }) => {
                <NavLink className="header__list--links" exact to="/msg-board">Message board</NavLink>
             </li>
             <button onClick={e => {
+               if(userDetails.username) {
+                  socket.emit('logout', userDetails.username)
+               }
                setUserDetails({})
                setIsAuth(false)
                localStorage.removeItem('token')

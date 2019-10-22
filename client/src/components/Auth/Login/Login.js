@@ -2,12 +2,15 @@ import React, { useState, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { Redirect } from 'react-router-dom'
 
+
 import login from '../../../queries/login'
 import { AuthContext } from '../../../context/AuthContext'
+import { SocketContext } from '../../../context/SocketContext'
 
 const Login = () => {
 
    const { setIsAuth, setUserDetails } = useContext(AuthContext)
+   const { socket } = useContext(SocketContext)
    const [identifier, setIdentifier] = useState('')
    const [password, setPassword] = useState('')
    const [loginMutation, { data, error }] = useMutation(login)
@@ -23,6 +26,7 @@ const Login = () => {
       setIsAuth(true)
       localStorage.setItem('token', data.login.token)
       setUserDetails(data.login.user)
+      socket.emit('auth', data.login.user)
       return <Redirect to="/" />
    }
 

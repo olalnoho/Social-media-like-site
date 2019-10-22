@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { AuthContext } from '../../context/AuthContext'
+import { SocketContext } from '../../context/SocketContext'
 import { Redirect } from 'react-router-dom'
 import query from '../../queries/getProfileById'
 
 const OtherProfile = props => {
    const { data, loading, error } = useQuery(query, { variables: { id: props.match.params.id } })
    const { userDetails } = useContext(AuthContext)
+   const { onlineList } = useContext(SocketContext)
 
    if (loading) {
       return <div className="container flex" />
@@ -35,6 +37,12 @@ const OtherProfile = props => {
                <h2 className="profile__heading--name">
                   {data.getProfileById.username}'s Profile
                </h2>
+               <div className="profile__heading--status">
+                  {data.getProfileById.username in onlineList ?
+                     <p> Online <i style={{ color: 'green' }} className="fas fa-circle"></i></p>
+                     : <p> Offline <i style={{ color: 'red' }} className="fas fa-circle"></i></p>
+                  }
+               </div>
             </div>
             <ul className="profile__bio">
                <li className="profile__bio--item">

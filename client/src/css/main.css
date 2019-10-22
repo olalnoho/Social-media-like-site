@@ -533,6 +533,15 @@
   font-size: 4rem;
 }
 
+.profile__heading--status p {
+  font-size: 2rem;
+}
+
+.profile__heading--status i {
+  margin-left: 1rem;
+  font-size: 2rem;
+}
+
 .profile__heading a {
   font-size: 1.4rem;
 }
