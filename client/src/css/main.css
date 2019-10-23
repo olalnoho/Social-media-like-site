@@ -238,6 +238,11 @@
   margin-bottom: 2rem;
 }
 
+.heading-2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
 .lead {
   font-size: 1.6rem;
 }
@@ -1019,6 +1024,96 @@
   .messageboard__messages--msg p {
     padding: 1rem 1rem;
   }
+}
+
+.privatemessages {
+  width: 80%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.privatemessages__heading {
+  padding: 2rem;
+}
+
+.privatemessages__msgs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 80%;
+  padding: 1rem;
+  margin-top: 5rem;
+}
+
+.privatemessages__msgs--msg {
+  width: 100%;
+  min-height: 20rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: max-content 1fr min-content;
+      grid-template-rows: -webkit-max-content 1fr -webkit-min-content;
+      grid-template-rows: max-content 1fr min-content;
+  -ms-grid-columns: max-content 10rem 1fr;
+      grid-template-columns: -webkit-max-content 10rem 1fr;
+      grid-template-columns: max-content 10rem 1fr;
+}
+
+.privatemessages__msgs--msg img {
+  height: 10rem;
+  width: auto;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+}
+
+.privatemessages__msgs--msg h3 {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+}
+
+.privatemessages__msgs--msg p {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  grid-column: 1/-1;
+}
+
+.privatemessages__msgs--msg button {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  grid-row: -2/-1;
+  grid-column: 1/-1;
 }
 
 .Loader {

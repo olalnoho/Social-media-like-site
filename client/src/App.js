@@ -21,6 +21,7 @@ import getUser from './queries/me'
 import EditProfile from './components/Profile/EditProfile';
 import MessageBoard from './components/MessageBoard/MessageBoard';
 import OtherProfile from './components/Profile/OtherProfile';
+import PrivateMessages from './components/PrivateMessages/PrivateMessages';
 
 const App = () => {
 
@@ -63,6 +64,7 @@ const App = () => {
         <Route path="/profiles/:id" component={OtherProfile} />
         <Route path="/edit-profile" component={props => <EditProfile {...props} authLoading={initLoad} />} />
         <Route path="/msg-board" component={MessageBoard} />
+        <Route path="/private-messages" component={PrivateMessages} />
         {/* <Route path="/profile-creation" component={ProfileCreation} /> */}
       </Switch>
     </>

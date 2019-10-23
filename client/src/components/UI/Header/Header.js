@@ -28,6 +28,9 @@ const Header = ({ authLoading, ...router }) => {
                <NavLink className="header__list--links" exact to="/">Home</NavLink>
             </li>
             <li className="header__list--item">
+               <NavLink className="header__list--links" exact to="/private-messages">PMs</NavLink>
+            </li>
+            <li className="header__list--item">
                <NavLink className="header__list--links" exact to="/profile">Profile</NavLink>
             </li>
             <li className="header__list--item">
