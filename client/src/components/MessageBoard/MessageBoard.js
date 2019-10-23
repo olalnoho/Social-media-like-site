@@ -12,6 +12,8 @@ import Spinner from '../UI/Spinner/Spinner'
 const defaultAvatar = "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png"
 
 const MessageBoard = () => {
+   const limit = 5
+   const [moreResults, setMoreResults] = useState(true)
    const { socket } = useContext(SocketContext)
    const { userDetails } = useContext(AuthContext)
    const [messageText, setMessageText] = useState('')
@@ -23,7 +25,8 @@ const MessageBoard = () => {
       loading: messageLoading,
       error: messageError,
       refetch,
-   } = useQuery(messageQuery, { fetchPolicy: 'network-only' })
+      fetchMore
+   } = useQuery(messageQuery, { variables: { offset: 0, limit }, fetchPolicy: 'network-only' })
 
 
    useEffect(() => {
@@ -39,7 +42,7 @@ const MessageBoard = () => {
       e.preventDefault()
       sendMessage({
          variables: { content: messageText }, refetchQueries: () => {
-            return [{ query: messageQuery }]
+            return [{ query: messageQuery, variables: { offset: 0, limit } }]
          }, awaitRefetchQueries: true
       }).then(_ => setMessageText(''))
    }
@@ -50,9 +53,27 @@ const MessageBoard = () => {
       }
    }
 
+   const loadMore = e => {
+      fetchMore({
+         variables: { offset: messages.getMessages.length },
+         updateQuery: (prev, { fetchMoreResult }) => {
+            if (!fetchMoreResult.getMessages.length) {
+               setMoreResults(false)
+               return prev
+            } else if (fetchMoreResult.getMessages.length < limit) {
+               setMoreResults(false)
+            }
+
+            return Object.assign({}, prev, {
+               getMessages: [...prev.getMessages, ...fetchMoreResult.getMessages]
+            })
+         }
+      })
+   }
+
    return (
       <div className="container flex">
-         <div className="messageboard">
+         <div className="messageboard flexcolumn">
             <form className="form" onSubmit={onSubmit} >
                <input
                   value={messageText}
@@ -67,8 +88,8 @@ const MessageBoard = () => {
             <div className="messageboard__messages">
                {messages.getMessages.map(msg => {
                   return <div key={msg.mid} className="messageboard__messages--msg">
-                     {msg.avatar ? <img src={msg.avatar} alt="users avatar" /> : 
-                                   <img src={defaultAvatar} alt="users avatar" /> }
+                     {msg.avatar ? <img src={msg.avatar} alt="users avatar" /> :
+                        <img src={defaultAvatar} alt="users avatar" />}
                      {msg.pid ? <Link to={`/profiles/${msg.pid}`}><h2>
                         {msg.username}
                      </h2></Link> : <h2>
@@ -85,6 +106,7 @@ const MessageBoard = () => {
                   </div>
                })}
             </div>
+            {moreResults && <button onClick={e => loadMore()} className="btn btn--secondary">Load more</button>}
          </div>
       </div>
    )

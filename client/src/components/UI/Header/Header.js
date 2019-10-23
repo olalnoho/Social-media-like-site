@@ -34,7 +34,7 @@ const Header = ({ authLoading, ...router }) => {
                <NavLink className="header__list--links" exact to="/msg-board">Message board</NavLink>
             </li>
             <button onClick={e => {
-               if(userDetails.username) {
+               if (userDetails.username) {
                   socket.emit('logout', userDetails.username)
                }
                setUserDetails({})

@@ -15,7 +15,7 @@ module.exports = gql`
    }
 
    extend type Query {
-      getMessages: [FullPost!]!
+      getMessages(offset: Int, limit: Int): [FullPost!]!
       getMessage: String!
    }
 

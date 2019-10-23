@@ -16,8 +16,10 @@ module.exports = {
             FROM message_board m 
             LEFT JOIN users u ON m.user = u.id 
             LEFT JOIN profile p ON p.user = u.id
-            ORDER BY m.time_sent DESC;
-            `)
+            ORDER BY m.time_sent DESC
+            LIMIT ?
+            OFFSET ?;
+            `, [args.limit, args.offset])
             
          return res.rows
          
