@@ -238,7 +238,7 @@
   margin-bottom: 2rem;
 }
 
-.heading-2 {
+.heading-3 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
 }
@@ -510,6 +510,7 @@
 
 .profile .avatar {
   height: 80%;
+  width: auto;
   border-radius: 10%;
 }
 
@@ -661,13 +662,15 @@
 }
 
 @media only screen and (max-width: 1200px) {
-  .profilecreation, .profile {
+  .profilecreation,
+  .profile {
     width: 90%;
   }
 }
 
 @media only screen and (max-width: 1000px) {
-  .profilecreation, .profile {
+  .profilecreation,
+  .profile {
     width: 100%;
     margin: 0;
     margin-bottom: 3rem;
@@ -693,7 +696,7 @@
         grid-template-rows: min-content min-content min-content 1fr;
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-    gap: .6rem;
+    gap: 0.6rem;
   }
   .profile__image {
     height: 100%;
@@ -702,68 +705,34 @@
     grid-row: 1/2;
     grid-column: 1/-1;
   }
+  .profile .avatar {
+    width: 80%;
+    height: auto;
+    border-radius: 10%;
+  }
   .profile__heading {
     padding: 1rem;
     -ms-grid-row: 2;
     -ms-grid-row-span: 1;
     grid-row: 2/3;
     grid-column: 1/-1;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
   }
   .profile__heading--name {
     margin-bottom: 1rem;
-    text-align: center;
     font-size: 2.5rem;
   }
   .profile__heading a {
     font-size: 1.4rem;
   }
   .profile__bio {
-    white-space: pre-wrap;
-    background-color: #160a24;
     grid-row: -3/-2;
     grid-column: 1/-1;
-    padding-top: 3rem;
-    padding-left: 1rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
   }
   .profile__bio--item {
     text-align: center;
-    margin: 0 auto;
-    line-height: 2.2rem;
-    width: 80%;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-  .profile__bio--item label {
-    margin-bottom: 1rem;
-    font-weight: 700;
-    display: block;
-    font-size: 1.4rem;
   }
   .profile__posts {
     grid-row: -2/-1;
@@ -793,7 +762,7 @@
       grid-template-columns: 1fr min-content;
   background-color: #0b0314;
   border: none;
-  margin: auto;
+  margin: 0 auto;
   width: 80%;
 }
 

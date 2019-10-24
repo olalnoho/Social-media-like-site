@@ -86,7 +86,7 @@ const MessageBoard = () => {
             </form>
             {(sendError || messageError) && <div className="alert" style={{ textAlign: 'center' }}> Something went wrong, try again.</div>}
             <div className="messageboard__messages">
-               {messages.getMessages.map(msg => {
+               {messages.getMessages.length > 0 ? messages.getMessages.map(msg => {
                   return <div key={msg.mid} className="messageboard__messages--msg">
                      {msg.avatar ? <img src={msg.avatar} alt="users avatar" /> :
                         <img src={defaultAvatar} alt="users avatar" />}
@@ -104,9 +104,9 @@ const MessageBoard = () => {
                            className="btn btn--thirdary">Remove</button>
                      }
                   </div>
-               })}
+               }) : <h2 style={{ textAlign: 'center' }} className="heading-2"> No messages yet... </h2>}
             </div>
-            {moreResults && <button onClick={e => loadMore()} className="btn btn--secondary">Load more</button>}
+            {moreResults && messages.getMessages.length > 5 && <button onClick={e => loadMore()} className="btn btn--secondary">Load more</button>}
          </div>
       </div>
    )
