@@ -32,10 +32,6 @@ const Profile = ({ authLoading }) => {
       && data.getProfile === null
    ) return <ProfileCreation />
 
-   if (data) {
-      console.log(data)
-   }
-
    return (
       <div className="container flex">
          <div className="profile">

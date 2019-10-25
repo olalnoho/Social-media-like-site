@@ -157,7 +157,7 @@
         width: 50%;
         margin: auto;
         padding: 0;
-        transition: all 0.5s;
+        transition: all 0.5s ease-out;
       }
       input[type="submit"] {
         margin-left: 2rem;
@@ -264,6 +264,14 @@
     margin: 0;
     margin-bottom: 3rem;
     border: none;
+
+    &__posts {
+      .form {
+        input[type="text"] {
+          width: 60%;
+        }
+      }
+    }
   }
 }
 
@@ -281,6 +289,18 @@
     grid-template-rows: min-content min-content min-content 1fr;
     grid-template-columns: 1fr;
     gap: 0.6rem;
+
+    &__posts {
+      .form {
+        flex-direction: column;
+        input[type="text"] {
+          margin-bottom: 2rem;
+        }
+        input[type="submit"] {
+          margin: auto;
+        }
+      }
+    }
 
     &__image {
       height: 100%;
@@ -320,6 +340,21 @@
       grid-row: -2/-1;
       grid-column: 1/-1;
       background-color: $main-lighter;
+    }
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .profile {
+    &__posts {
+      .form {
+        input[type="text"] {
+          width: 100%;
+        }
+      }
+      &--post {
+        width: 90%;
+      }
     }
   }
 }

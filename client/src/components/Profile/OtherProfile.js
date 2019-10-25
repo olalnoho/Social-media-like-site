@@ -73,7 +73,7 @@ const OtherProfile = props => {
                </li>
             </ul>
             <div className="profile__posts">
-               <PostForm placeholder={`Tell ${data.getProfileById.username} something..`} profileId={props.match.params.id} />
+               <PostForm placeholder={`Tell ${data.getProfileById.username} something`} profileId={props.match.params.id} />
                {postData && postData.getProfilePosts.map(msg => {
                   return <ProfilePost key={msg.id} msg={msg} />
                })}
