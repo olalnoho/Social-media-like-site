@@ -28,17 +28,21 @@ module.exports = {
                   pm.content,
                   uaa.userId,
                   uaa.username,
-                  uaa.avatar
+                  uaa.avatar,
+                  uaa.profileId,
+                  pm.time_sent
                FROM profile_messages pm
                INNER JOIN (
                   SELECT
                      username,
                      avatar,
+                     p.id as profileId,
                      u.id as userId
                   FROM users u 
                   INNER JOIN profiles p ON p.user = u.id
                ) as uaa ON uaa.userId = pm.from_user
-               WHERE pm.profile = ?;
+               WHERE pm.profile = ?
+               ORDER BY pm.time_sent DESC;
          `, id)
 
          return res.rows
@@ -70,21 +74,15 @@ module.exports = {
          return profile[0]
       },
 
-      async createProfilePost(parent, { data }, { req, db }) {
+      async createProfilePost(parent, { id, content }, { req, db }) {
          const userId = getUserId(req.req)
-         const res = await db.raw(`
-            SELECT
-               pm.id,
-               pm.content,
-               u.username,
-               p.avatar
-            FROM profile_messages pm
-            INNER JOIN users u ON u.id = pm.from_user
-            iNNER JOIN profiles p ON p.id = pm.profile
-            WHERE p.id = ?
-         `, id)
+         const res = await db('profile_messages').insert({
+            from_user: userId,
+            content,
+            profile: id
+         }).returning('*')
 
-         return res.rows
+         return res[0]
       }
    }
 }

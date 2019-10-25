@@ -7,6 +7,7 @@ const getProfileById = gql`
         content
         username
         avatar
+        profileid
       }
     }
 `

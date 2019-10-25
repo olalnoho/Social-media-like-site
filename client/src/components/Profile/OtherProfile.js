@@ -8,6 +8,7 @@ import postQuery from '../../queries/getProfilePosts'
 import Modal from '../UI/Modal/Modal'
 import PMForm from './PMForm'
 import ProfilePost from './ProfilePost'
+import PostForm from './PostForm'
 
 const OtherProfile = props => {
    const { data, loading, error } = useQuery(query, { variables: { id: props.match.params.id } })
@@ -72,6 +73,7 @@ const OtherProfile = props => {
                </li>
             </ul>
             <div className="profile__posts">
+               <PostForm placeholder={`Tell ${data.getProfileById.username} something..`} profileId={props.match.params.id} />
                {postData && postData.getProfilePosts.map(msg => {
                   return <ProfilePost key={msg.id} msg={msg} />
                })}

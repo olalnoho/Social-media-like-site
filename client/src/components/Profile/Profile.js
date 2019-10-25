@@ -10,6 +10,7 @@ import getProfilePosts from '../../queries/getProfilePosts'
 import ProfileCreation from './ProfileCreation'
 
 import ProfilePost from './ProfilePost'
+import PostForm from './PostForm'
 
 const Profile = ({ authLoading }) => {
    const { data, loading: profileLoading, error } = useQuery(getProfile)
@@ -17,7 +18,7 @@ const Profile = ({ authLoading }) => {
    const [profileMsgQuery, { data: profileMsgQueryData }] = useLazyQuery(getProfilePosts)
 
    useEffect(() => {
-      data && profileMsgQuery({ variables: { id: data.getProfile.id } })
+      data && data.getProfile !== null && profileMsgQuery({ variables: { id: data.getProfile.id } })
    }, [data, profileMsgQuery])
 
    if (!authLoading && !isAuth) {
@@ -30,6 +31,10 @@ const Profile = ({ authLoading }) => {
       && !authLoading
       && data.getProfile === null
    ) return <ProfileCreation />
+
+   if (data) {
+      console.log(data)
+   }
 
    return (
       <div className="container flex">
@@ -58,6 +63,7 @@ const Profile = ({ authLoading }) => {
                </li>
             </ul>
             <div className="profile__posts">
+               <PostForm profileId={data.getProfile.id} placeholder={"What's on your mind?"} />
                {profileMsgQueryData && profileMsgQueryData.getProfilePosts.map(msg => {
                   return <ProfilePost key={msg.id} msg={msg} />
                })}
