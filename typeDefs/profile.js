@@ -16,6 +16,7 @@ module.exports = gql`
       bio: String
       username: String!
       email: String!
+      user: ID!
    }
 
    input createProfile {

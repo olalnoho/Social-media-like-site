@@ -20,7 +20,7 @@ module.exports = gql`
    }
 
    extend type Mutation {
-      sendPrivateMessage(to: ID content: String!): privateMessage!
+      sendPrivateMessage(to: ID! content: String!): privateMessage!
    }
 
 `

@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks'
 import getPMs from '../../queries/getPrivateMessages'
 import PrivateMessage from './PrivateMessage'
 const PrivateMessages = () => {
-   const { data, loading, error } = useQuery(getPMs)
+   const { data } = useQuery(getPMs)
    return (
       <div className="container flexcolumn">
          <div className="privatemessages">
@@ -15,7 +15,7 @@ const PrivateMessages = () => {
             </div>
             <div className="privatemessages__msgs">
                {data && data.getPrivateMessages.map(msg => {
-                  return <PrivateMessage key={msg.id} msg={msg}/>
+                  return <PrivateMessage key={msg.id} msg={msg} />
                })}
             </div>
          </div>

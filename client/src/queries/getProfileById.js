@@ -6,7 +6,9 @@ const getProfileById = gql`
          avatar,
          location,
          bio,
-         username
+         username,
+         id
+         user,
       }
    }
 `

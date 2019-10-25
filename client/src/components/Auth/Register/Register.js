@@ -43,7 +43,7 @@ const Register = () => {
                onChange={e => setFormData({ ...formData, username: e.target.value })} />
             <input
                value={formData.email}
-               type="text"
+               type="email"
                placeholder="Email"
                onChange={e => setFormData({ ...formData, email: e.target.value })} />
             <input
