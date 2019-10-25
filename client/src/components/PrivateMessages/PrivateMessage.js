@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PrivateMessage = ({ msg }) => {
-   console.log(msg)
+   (msg)
    return (
       <div className="privatemessages__msgs--msg">
          <img src={msg.from_user.avatar} alt="avatar" />

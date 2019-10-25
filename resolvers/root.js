@@ -34,8 +34,6 @@ const resolvers = {
                "users.id": parent.from_user
             })
 
-         console.log(res[0])
-
          return res[0]
       }
    }

@@ -29,10 +29,6 @@ const OtherProfile = props => {
       return <Redirect to="/profile" />
    }
 
-   if (data) {
-      console.log(data.getProfileById)
-   }
-
    return (
       <div className="container flex" onClick={e => {
          setShowModal(false)
