@@ -62,7 +62,7 @@
 .profile {
   width: 80%;
   // 20rem for avatar-size
-  grid-template-columns: 20rem 10rem 1fr;
+  grid-template-columns: 20rem 4rem 1fr;
   grid-template-rows: 20rem 1fr;
   gap: 1rem;
 
@@ -153,17 +153,18 @@
       border: none;
       flex-direction: row;
       align-items: center;
+      justify-content: center;
       input[type="text"] {
-        width: 50%;
+        font-size: 1.4rem;
+
+        background-color: $main-bg;
+        // width: 50%;
+        border: 1px solid blanchedalmond;
         margin: auto;
-        padding: 0;
-        transition: all 0.5s ease-out;
+        padding: 1rem;
       }
       input[type="submit"] {
-        margin-left: 2rem;
-      }
-      input[type="text"]:focus {
-        width: 100%;
+        margin: auto 2rem;
       }
     }
 
@@ -194,6 +195,7 @@
       }
 
       h3 {
+        font-size: 1.5rem;
         text-align: center;
         margin: 0;
         grid-column: 1/2;
@@ -266,6 +268,10 @@
     border: none;
 
     &__posts {
+      width: 100%;
+      &--post {
+        width: 100%;
+      }
       .form {
         input[type="text"] {
           width: 60%;
@@ -294,10 +300,33 @@
       .form {
         flex-direction: column;
         input[type="text"] {
+          width: 100%;
           margin-bottom: 2rem;
         }
         input[type="submit"] {
           margin: auto;
+        }
+      }
+
+      &--post {
+        grid-template-rows: min-content min-content 1fr;
+        grid-template-columns: 1fr;
+
+        img {
+          justify-self: center;
+          grid-row: 1/2;
+          grid-column: 1/-1;
+        }
+        h3 {
+          grid-row: 2/3;
+          grid-column: 1/-1;
+          margin-bottom: 1rem;
+        }
+        p {
+          margin: 0;
+          text-align: center;
+          grid-row: 3/4;
+          grid-column: 1/-1;
         }
       }
     }
