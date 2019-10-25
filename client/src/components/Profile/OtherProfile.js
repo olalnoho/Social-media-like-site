@@ -4,11 +4,14 @@ import { AuthContext } from '../../context/AuthContext'
 import { SocketContext } from '../../context/SocketContext'
 import { Redirect } from 'react-router-dom'
 import query from '../../queries/getProfileById'
+import postQuery from '../../queries/getProfilePosts'
 import Modal from '../UI/Modal/Modal'
 import PMForm from './PMForm'
+import ProfilePost from './ProfilePost'
 
 const OtherProfile = props => {
    const { data, loading, error } = useQuery(query, { variables: { id: props.match.params.id } })
+   const { data: postData } = useQuery(postQuery, { variables: { id: props.match.params.id } })
    const { userDetails } = useContext(AuthContext)
    const { onlineList } = useContext(SocketContext)
    const [showModal, setShowModal] = useState(false)
@@ -69,7 +72,9 @@ const OtherProfile = props => {
                </li>
             </ul>
             <div className="profile__posts">
-
+               {postData && postData.getProfilePosts.map(msg => {
+                  return <ProfilePost key={msg.id} msg={msg} />
+               })}
             </div>
          </div>
       </div>

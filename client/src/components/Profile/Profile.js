@@ -1,13 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { Redirect, Link } from 'react-router-dom'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useLazyQuery } from '@apollo/react-hooks'
+
 import getProfile from '../../queries/getProfile'
+// getProfileMessages is a seperate query from getProfile so 
+// we don't have to refetch the entire profile when refetching posts.
+import getProfilePosts from '../../queries/getProfilePosts'
 import ProfileCreation from './ProfileCreation'
+
+import ProfilePost from './ProfilePost'
 
 const Profile = ({ authLoading }) => {
    const { data, loading: profileLoading, error } = useQuery(getProfile)
    const { isAuth, userDetails } = useContext(AuthContext)
+   const [profileMsgQuery, { data: profileMsgQueryData }] = useLazyQuery(getProfilePosts)
+
+   useEffect(() => {
+      data && profileMsgQuery({ variables: { id: data.getProfile.id } })
+   }, [data, profileMsgQuery])
 
    if (!authLoading && !isAuth) {
       return <Redirect to="/login" />
@@ -47,7 +58,9 @@ const Profile = ({ authLoading }) => {
                </li>
             </ul>
             <div className="profile__posts">
-
+               {profileMsgQueryData && profileMsgQueryData.getProfilePosts.map(msg => {
+                  return <ProfilePost key={msg.id} msg={msg} />
+               })}
             </div>
          </div>
       </div>

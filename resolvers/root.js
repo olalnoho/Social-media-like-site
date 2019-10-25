@@ -28,7 +28,7 @@ const resolvers = {
       
       async from_user(parent, args, { db }) {
          const res = await db('users')
-            .join('profile', 'users.id', 'profile.user')
+            .join('profiles', 'users.id', 'profiles.user')
             .select('*')
             .where({
                "users.id": parent.from_user

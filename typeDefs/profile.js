@@ -9,6 +9,13 @@ module.exports = gql`
       bio: String
    }
 
+   type ProfilePost {
+      id: ID!
+      content: String!
+      username: String!
+      avatar: String!
+   }
+
    type ProfileWithUser {
       id: ID!
       avatar: String!
@@ -17,6 +24,7 @@ module.exports = gql`
       username: String!
       email: String!
       user: ID!
+      posts: [ProfilePost!]
    }
 
    input createProfile {
@@ -28,11 +36,13 @@ module.exports = gql`
    extend type Query {
       getProfile: Profile
       getProfileById(id: ID!): ProfileWithUser!
+      getProfilePosts(id: ID!): [ProfilePost!]!
    }
 
    extend type Mutation {
       createProfile(data: createProfile): Profile!
       updateProfile(data: createProfile): Profile!
+      createProfilePost(id: ID! content: String!): ProfilePost!
    }
 
 `
