@@ -1,7 +1,7 @@
 // Third party libs
 const { ApolloServer } = require('apollo-server-express')
 const express = require('express')
-const socketManager = require('./socketManager')
+
 
 // Database and GraphQL stuff
 const db = require('./db/db')
@@ -9,6 +9,7 @@ const typeDefs = require('./typeDefs/index')
 const resolvers = require('./resolvers/root')
 
 // Socket stuff
+const socketManager = require('./socketManager')
 const app = express()
 const http = app.listen(4000)
 const io = require('socket.io')(http)

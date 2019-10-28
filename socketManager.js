@@ -12,9 +12,7 @@ module.exports = function (io) {
       })
 
       socket.on('joinProfileRoom', profileRoom => {
-         socket.join(profileRoom, () => {
-            console.log(socket.rooms)
-         })
+         socket.join(profileRoom)
       })
 
       socket.on('leaveProfileRoom', profileRoom => {
