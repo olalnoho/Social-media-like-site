@@ -21,11 +21,6 @@ const server = new ApolloServer({
    context: req => ({ req, db, io })
 })
 
-// Should probably use GraphQL-subscriptions instead of sockets
-// for real-time-updates, but Apollo requires extra setup 
-// and i'm more familiar with socket.io,
-// so this is simpler for now when testing.
-// Might/should re-do later.
 socketManager(io)
 
 server.applyMiddleware({ app })
