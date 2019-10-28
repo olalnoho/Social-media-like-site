@@ -734,9 +734,9 @@
   -ms-grid-columns: min-content 1fr;
       grid-template-columns: -webkit-min-content 1fr;
       grid-template-columns: min-content 1fr;
-  -ms-grid-rows: min-content 1fr;
-      grid-template-rows: -webkit-min-content 1fr;
-      grid-template-rows: min-content 1fr;
+  -ms-grid-rows: min-content min-content min-content 1fr;
+      grid-template-rows: -webkit-min-content -webkit-min-content -webkit-min-content 1fr;
+      grid-template-rows: min-content min-content min-content 1fr;
 }
 
 .profile__posts--post:not(:last-child) {
@@ -771,6 +771,17 @@
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2/3;
+}
+
+.profile__posts--post button {
+  margin: 1rem auto;
+  background-color: crimson;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3/4;
 }
 
 .profile__posts--post p {

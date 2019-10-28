@@ -44,6 +44,7 @@ module.exports = gql`
       createProfile(data: createProfile): Profile!
       updateProfile(data: createProfile): Profile!
       createProfilePost(id: ID! content: String!): ProfilePost!
+      removeProfilePost(id: ID!): ID!
    }
 
 `

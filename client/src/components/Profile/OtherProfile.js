@@ -17,6 +17,7 @@ const OtherProfile = props => {
    const { onlineList, socket } = useContext(SocketContext)
    const [showModal, setShowModal] = useState(false)
 
+
    useEffect(() => {
       // For updating profile posts in real time
       if (data && data.getProfileById) {
@@ -93,7 +94,7 @@ const OtherProfile = props => {
                   username={data.getProfileById.username}
                   profileId={props.match.params.id} />
                {postData && postData.getProfilePosts.map(msg => {
-                  return <ProfilePost key={msg.id} msg={msg} />
+                  return <ProfilePost profileId={data.getProfileById.id} key={msg.id} msg={msg} />
                })}
             </div>
          </div>

@@ -83,6 +83,18 @@ module.exports = {
          }).returning('*')
 
          return res[0]
+      },
+
+      async removeProfilePost(parent, { id }, { req, db }) {
+         // @note/todo should be impossible to get here without
+         // having the permissions to delete; but maybe
+         // *just incase*, add auth stuff here?
+         const res = await db('profile_messages')
+            .delete()
+            .where({ id })
+            .returning('*')
+
+         return res[0].id
       }
    }
 }

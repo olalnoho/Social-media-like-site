@@ -27,13 +27,11 @@ const Profile = ({ authLoading }) => {
    useEffect(() => {
       // For real time updates on profile posts
       if (userDetails.username) {
-         socket.emit('joinProfileRoom', userDetails.username)
          socket.on('updateProfilePosts', refetch)
       }
 
       return () => {
          socket.off('updateProfilePosts', refetch)
-         socket.emit('leaveProfileRoom', userDetails.username)
       }
 
    }, [userDetails.username, refetch, socket])
@@ -78,7 +76,7 @@ const Profile = ({ authLoading }) => {
             <div className="profile__posts">
                <PostForm username={userDetails.username} profileId={data.getProfile.id} placeholder={"What's on your mind?"} />
                {profileMsgQueryData && profileMsgQueryData.getProfilePosts.map(msg => {
-                  return <ProfilePost key={msg.id} msg={msg} />
+                  return <ProfilePost owner={true} profileId={msg.profileid} key={msg.id} msg={msg} />
                })}
             </div>
          </div>
