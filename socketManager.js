@@ -1,5 +1,7 @@
 module.exports = function (io) {
+
    const onlineUsers = {}
+   
    io.on('connection', socket => {
       io.emit('updateOnlineData', onlineUsers)
 
@@ -10,7 +12,9 @@ module.exports = function (io) {
       })
 
       socket.on('joinProfileRoom', profileRoom => {
-         socket.join(profileRoom)
+         socket.join(profileRoom, () => {
+            console.log(socket.rooms)
+         })
       })
 
       socket.on('leaveProfileRoom', profileRoom => {

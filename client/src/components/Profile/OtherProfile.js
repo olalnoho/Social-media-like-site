@@ -19,19 +19,15 @@ const OtherProfile = props => {
 
    useEffect(() => {
       // For updating profile posts in real time
-      if (data) {
-         if (data.getProfileById) {
-            socket.emit('joinProfileRoom', data.getProfileById.username)
-            socket.on('updateProfilePosts', refetch)
-         }
+      if (data && data.getProfileById) {
+         socket.emit('joinProfileRoom', data.getProfileById.username)
+         socket.on('updateProfilePosts', refetch)
       }
 
       return () => {
          socket.off('updateProfilePosts', refetch)
-         if (data) {
-            if (data.getProfileById) {
-               socket.emit('leaveProfileRoom', data.getProfileById.username)
-            }
+         if (data && data.getProfileById) {
+            socket.emit('leaveProfileRoom', data.getProfileById.username)
          }
       }
    }, [data, refetch, socket])
@@ -104,13 +100,5 @@ const OtherProfile = props => {
       </div>
    )
 }
-
-
-/*
- {data.getProfileById.username in onlineList ?
-    <p> Online <i style={{ color: 'green' }} className="fas fa-circle"></i></p>
-    : <p> Offline <i style={{ color: 'red' }} className="fas fa-circle"></i></p>
- }
-*/
 
 export default OtherProfile
