@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { AuthContext } from '../../context/AuthContext'
 import { SocketContext } from '../../context/SocketContext'
@@ -12,10 +12,29 @@ import PostForm from './PostForm'
 
 const OtherProfile = props => {
    const { data, loading, error } = useQuery(query, { variables: { id: props.match.params.id } })
-   const { data: postData } = useQuery(postQuery, { variables: { id: props.match.params.id } })
+   const { data: postData, refetch } = useQuery(postQuery, { variables: { id: props.match.params.id } })
    const { userDetails } = useContext(AuthContext)
-   const { onlineList } = useContext(SocketContext)
+   const { onlineList, socket } = useContext(SocketContext)
    const [showModal, setShowModal] = useState(false)
+
+   useEffect(() => {
+      // For updating profile posts in real time
+      if (data) {
+         if (data.getProfileById) {
+            socket.emit('joinProfileRoom', data.getProfileById.username)
+            socket.on('updateProfilePosts', refetch)
+         }
+      }
+
+      return () => {
+         socket.off('updateProfilePosts', refetch)
+         if (data) {
+            if (data.getProfileById) {
+               socket.emit('leaveProfileRoom', data.getProfileById.username)
+            }
+         }
+      }
+   }, [data, refetch, socket])
 
    if (loading) {
       return <div className="container flex" />
@@ -73,7 +92,10 @@ const OtherProfile = props => {
                </li>
             </ul>
             <div className="profile__posts">
-               <PostForm placeholder={`Tell ${data.getProfileById.username} something`} profileId={props.match.params.id} />
+               <PostForm
+                  placeholder={`Tell ${data.getProfileById.username} something`}
+                  username={data.getProfileById.username}
+                  profileId={props.match.params.id} />
                {postData && postData.getProfilePosts.map(msg => {
                   return <ProfilePost key={msg.id} msg={msg} />
                })}

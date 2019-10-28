@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../../context/AuthContext'
+import { SocketContext } from '../../context/SocketContext'
 import { Redirect, Link } from 'react-router-dom'
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 
@@ -15,11 +16,27 @@ import PostForm from './PostForm'
 const Profile = ({ authLoading }) => {
    const { data, loading: profileLoading, error } = useQuery(getProfile)
    const { isAuth, userDetails } = useContext(AuthContext)
-   const [profileMsgQuery, { data: profileMsgQueryData }] = useLazyQuery(getProfilePosts)
+   const { socket } = useContext(SocketContext)
+   const [profileMsgQuery, { data: profileMsgQueryData, refetch }] = useLazyQuery(getProfilePosts)
 
    useEffect(() => {
+      // Fetch posts for the profile
       data && data.getProfile !== null && profileMsgQuery({ variables: { id: data.getProfile.id } })
    }, [data, profileMsgQuery])
+
+   useEffect(() => {
+      // For real time updates on profile posts
+      if (userDetails.username) {
+         socket.emit('joinProfileRoom', userDetails.username)
+         socket.on('updateProfilePosts', refetch)
+      }
+
+      return () => {
+         socket.off('updateProfilePosts', refetch)
+         socket.emit('leaveProfileRoom', userDetails.username)
+      }
+
+   }, [userDetails.username, refetch, socket])
 
    if (!authLoading && !isAuth) {
       return <Redirect to="/login" />
@@ -59,7 +76,7 @@ const Profile = ({ authLoading }) => {
                </li>
             </ul>
             <div className="profile__posts">
-               <PostForm profileId={data.getProfile.id} placeholder={"What's on your mind?"} />
+               <PostForm username={userDetails.username} profileId={data.getProfile.id} placeholder={"What's on your mind?"} />
                {profileMsgQueryData && profileMsgQueryData.getProfilePosts.map(msg => {
                   return <ProfilePost key={msg.id} msg={msg} />
                })}

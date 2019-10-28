@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import { SocketContext } from '../../context/SocketContext'
 import createProfilePost from '../../queries/createProfilePost'
 import getProfilePosts from '../../queries/getProfilePosts'
-const PostForm = ({ placeholder, profileId }) => {
+const PostForm = ({ placeholder, profileId, username }) => {
+   const { socket } = useContext(SocketContext)
    const [submitPost] = useMutation(createProfilePost)
    const [message, setMessage] = useState('')
 
@@ -12,7 +14,10 @@ const PostForm = ({ placeholder, profileId }) => {
          variables: { id: profileId, content: message }, refetchQueries: () => {
             return [{ query: getProfilePosts, variables: { id: profileId } }]
          }, awaitRefetchQueries: true
-      }).then(_ => setMessage(''))
+      }).then(_ => {
+         setMessage('')
+         socket.emit('newPost', username)
+      })
    }
 
    return (
