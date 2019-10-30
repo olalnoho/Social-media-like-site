@@ -37,7 +37,7 @@ module.exports = gql`
    extend type Query {
       getProfile: Profile
       getProfileById(id: ID!): ProfileWithUser!
-      getProfilePosts(id: ID!): [ProfilePost!]!
+      getProfilePosts(id: ID! limit: Int! offset: Int!): [ProfilePost!]!
    }
 
    extend type Mutation {

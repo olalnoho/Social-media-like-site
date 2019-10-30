@@ -140,11 +140,17 @@
   }
 
   &__posts {
+    display: flex;
+    flex-direction: column;
     padding: 1rem;
     padding-top: 2rem;
     grid-row: 2/3;
     grid-column: 3/-1;
     background-color: $main-lighter;
+
+    .loadmore {
+      margin: 0 auto;
+    }
 
     .form {
       width: 80%;
@@ -268,7 +274,7 @@
   .profile {
     width: 100%;
     margin: 0;
-    margin-bottom: 3rem;
+    // margin-bottom: 3rem;
     border: none;
 
     &__posts {

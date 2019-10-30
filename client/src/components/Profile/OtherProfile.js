@@ -11,11 +11,19 @@ import ProfilePost from './ProfilePost'
 import PostForm from './PostForm'
 
 const OtherProfile = props => {
+   const limit = 5
    const { data, loading, error } = useQuery(query, { variables: { id: props.match.params.id } })
-   const { data: postData, refetch } = useQuery(postQuery, { variables: { id: props.match.params.id } })
+   const { data: postData, refetch, fetchMore } = useQuery(postQuery, {
+      variables: {
+         id: props.match.params.id,
+         limit: 5,
+         offset: 0
+      }
+   })
    const { userDetails } = useContext(AuthContext)
    const { onlineList, socket } = useContext(SocketContext)
    const [showModal, setShowModal] = useState(false)
+   const [moreResults, setMoreResults] = useState(true)
 
    useEffect(() => {
       // For updating profile posts in real time
@@ -31,6 +39,24 @@ const OtherProfile = props => {
          }
       }
    }, [data, refetch, socket])
+
+   const loadMore = e => {
+      fetchMore({
+         variables: { offset: postData.getProfilePosts.length },
+         updateQuery: (prev, { fetchMoreResult }) => {
+            if (!fetchMoreResult.getProfilePosts.length) {
+               setMoreResults(false)
+               return prev
+            } else if (fetchMoreResult.getProfilePosts.length < limit) {
+               setMoreResults(false)
+            }
+
+            return Object.assign({}, prev, {
+               getProfilePosts: [...prev.getProfilePosts, ...fetchMoreResult.getProfilePosts]
+            })
+         }
+      })
+   }
 
    if (loading) {
       return <div className="container flex" />
@@ -89,17 +115,21 @@ const OtherProfile = props => {
             </ul>
             <div className="profile__posts">
                <PostForm
+                  setMoreResults={setMoreResults}
                   placeholder={`Tell ${data.getProfileById.username} something`}
                   username={data.getProfileById.username}
                   profileId={props.match.params.id} />
                {postData && postData.getProfilePosts.map(msg => {
                   return <ProfilePost
+                     setMoreResults={setMoreResults}
                      profileUsername={data.getProfileById.username}
                      profileId={data.getProfileById.id}
                      key={msg.id}
                      msg={msg}
                   />
                })}
+               {moreResults && postData && postData.getProfilePosts.length === 5 &&
+                  <button onClick={e => loadMore()} className="btn btn--secondary loadmore">Load more</button>}
             </div>
          </div>
       </div>

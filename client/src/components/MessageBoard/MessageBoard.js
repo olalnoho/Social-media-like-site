@@ -106,7 +106,9 @@ const MessageBoard = () => {
                   </div>
                }) : <h2 style={{ textAlign: 'center' }} className="heading-2"> No messages yet... </h2>}
             </div>
-            {moreResults && messages.getMessages.length > 5 && <button onClick={e => loadMore()} className="btn btn--secondary">Load more</button>}
+            {moreResults && messages.getMessages.length === 5 &&
+               <button onClick={e => loadMore()} className="btn btn--secondary">Load more</button>
+            }
          </div>
       </div>
    )

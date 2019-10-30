@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { SocketContext } from '../../context/SocketContext'
 import { Redirect, Link } from 'react-router-dom'
@@ -14,27 +14,59 @@ import ProfilePost from './ProfilePost'
 import PostForm from './PostForm'
 
 const Profile = ({ authLoading }) => {
+   const limit = 5
    const { data, loading: profileLoading, error } = useQuery(getProfile)
+   const [moreResults, setMoreResults] = useState(true)
    const { isAuth, userDetails } = useContext(AuthContext)
    const { socket } = useContext(SocketContext)
-   const [profileMsgQuery, { data: profileMsgQueryData, refetch }] = useLazyQuery(getProfilePosts)
+   const [profileMsgQuery, { data: profileMsgQueryData, refetch, fetchMore }] = useLazyQuery(getProfilePosts)
 
    useEffect(() => {
       // Fetch posts for the profile
-      data && data.getProfile !== null && profileMsgQuery({ variables: { id: data.getProfile.id } })
+      if (data && data.getProfile !== null) {
+         profileMsgQuery({
+            variables: {
+               id: data.getProfile.id,
+               limit: 5,
+               offset: 0
+            }
+         })
+      }
    }, [data, profileMsgQuery])
 
    useEffect(() => {
+      const refetchAndUpdate = () => {
+         refetch()
+         setMoreResults(true)
+      }
       // For real time updates on profile posts
       if (userDetails.username) {
-         socket.on('updateProfilePosts', refetch)
+         socket.on('updateProfilePosts', refetchAndUpdate)
       }
 
       return () => {
-         socket.off('updateProfilePosts', refetch)
+         socket.off('updateProfilePosts', refetchAndUpdate)
       }
 
    }, [userDetails.username, refetch, socket])
+
+   const loadMore = e => {
+      fetchMore({
+         variables: { offset: profileMsgQueryData.getProfilePosts.length },
+         updateQuery: (prev, { fetchMoreResult }) => {
+            if (!fetchMoreResult.getProfilePosts.length) {
+               setMoreResults(false)
+               return prev
+            } else if (fetchMoreResult.getProfilePosts.length < limit) {
+               setMoreResults(false)
+            }
+
+            return Object.assign({}, prev, {
+               getProfilePosts: [...prev.getProfilePosts, ...fetchMoreResult.getProfilePosts]
+            })
+         }
+      })
+   }
 
    if (!authLoading && !isAuth) {
       return <Redirect to="/login" />
@@ -74,15 +106,22 @@ const Profile = ({ authLoading }) => {
                </li>
             </ul>
             <div className="profile__posts">
-               <PostForm username={userDetails.username} profileId={data.getProfile.id} placeholder={"What's on your mind?"} />
+               <PostForm
+                  setMoreResults={setMoreResults}
+                  username={userDetails.username}
+                  profileId={data.getProfile.id}
+                  placeholder={"What's on your mind?"} />
                {profileMsgQueryData && profileMsgQueryData.getProfilePosts.map(msg => {
                   return <ProfilePost
+                     setMoreResults={setMoreResults}
                      owner={true}
                      profileUsername={userDetails.username}
                      profileId={msg.profileid}
                      key={msg.id}
                      msg={msg} />
                })}
+               {moreResults && profileMsgQueryData && profileMsgQueryData.getProfilePosts.length === 5 &&
+                  <button onClick={e => loadMore()} className="btn btn--secondary loadmore">Load more</button>}
             </div>
          </div>
       </div>

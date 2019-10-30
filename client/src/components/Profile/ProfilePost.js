@@ -6,7 +6,7 @@ import deleteProfilePostMutation from '../../queries/deleteProfilePost'
 import getProfilePosts from '../../queries/getProfilePosts'
 import { Link } from 'react-router-dom'
 const defaultAvatar = "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png"
-const ProfilePost = ({ msg, owner, profileId, profileUsername }) => {
+const ProfilePost = ({ msg, owner, profileId, profileUsername, setMoreResults }) => {
    const { userDetails } = useContext(AuthContext)
    const { socket } = useContext(SocketContext)
    const [deletePost] = useMutation(deleteProfilePostMutation)
@@ -19,11 +19,12 @@ const ProfilePost = ({ msg, owner, profileId, profileUsername }) => {
          refetchQueries: () => [
             {
                query: getProfilePosts,
-               variables: { id: profileId }
+               variables: { id: profileId, limit: 5, offset: 0 }
             }],
          awaitRefetchQueries: true
       }).then(_ => {
          socket.emit('newPost', profileUsername)
+         setMoreResults(true)
       })
    }
 

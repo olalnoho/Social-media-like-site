@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { SocketContext } from '../../context/SocketContext'
 import createProfilePost from '../../queries/createProfilePost'
 import getProfilePosts from '../../queries/getProfilePosts'
-const PostForm = ({ placeholder, profileId, username }) => {
+const PostForm = ({ placeholder, profileId, username, setMoreResults }) => {
    const { socket } = useContext(SocketContext)
    const [submitPost] = useMutation(createProfilePost)
    const [message, setMessage] = useState('')
@@ -13,7 +13,7 @@ const PostForm = ({ placeholder, profileId, username }) => {
       if (message) {
          submitPost({
             variables: { id: profileId, content: message }, refetchQueries: () => {
-               return [{ query: getProfilePosts, variables: { id: profileId } }]
+               return [{ query: getProfilePosts, variables: { id: profileId, limit: 5, offset: 0 } }]
             }, awaitRefetchQueries: true
          }).then(_ => {
             setMessage('')
@@ -22,6 +22,7 @@ const PostForm = ({ placeholder, profileId, username }) => {
             // when Profile/OtherProfile component mounts.
             // The username parameter is which room to emit in.
             socket.emit('newPost', username)
+            setMoreResults(true)
          })
       }
    }

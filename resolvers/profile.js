@@ -21,7 +21,10 @@ module.exports = {
          return profile[0]
       },
 
-      async getProfilePosts(parent, { id }, { req, db }) {
+      async getProfilePosts(parent, { id, offset, limit }, { req, db }) {
+         // @note
+         // left join because creating own profile
+         // shouldn't be necessary for posting on others.
          const res = await db.raw(`
                SELECT
                   pm.id,
@@ -42,8 +45,10 @@ module.exports = {
                   LEFT JOIN profiles p ON p.user = u.id
                ) as uaa ON uaa.userId = pm.from_user
                WHERE pm.profile = ?
-               ORDER BY pm.time_sent DESC;
-         `, id)
+               ORDER BY pm.time_sent DESC
+               LIMIT ?
+               OFFSET ?;
+         `, [id, limit, offset])
 
          return res.rows
       }

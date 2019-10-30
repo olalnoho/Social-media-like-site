@@ -686,6 +686,13 @@
 }
 
 .profile__posts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 1rem;
   padding-top: 2rem;
   -ms-grid-row: 2;
@@ -693,6 +700,10 @@
   grid-row: 2/3;
   grid-column: 3/-1;
   background-color: #160a24;
+}
+
+.profile__posts .loadmore {
+  margin: 0 auto;
 }
 
 .profile__posts .form {
@@ -864,7 +875,6 @@
   .profile {
     width: 100%;
     margin: 0;
-    margin-bottom: 3rem;
     border: none;
   }
   .profilecreation__posts,
