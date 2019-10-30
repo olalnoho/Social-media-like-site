@@ -14,7 +14,7 @@ import ProfilePost from './ProfilePost'
 import PostForm from './PostForm'
 
 const Profile = ({ authLoading }) => {
-   const limit = 5
+   const [limit, setLimit] = useState(5)
    const { data, loading: profileLoading, error } = useQuery(getProfile)
    const [moreResults, setMoreResults] = useState(true)
    const { isAuth, userDetails } = useContext(AuthContext)
@@ -36,7 +36,7 @@ const Profile = ({ authLoading }) => {
 
    useEffect(() => {
       const refetchAndUpdate = () => {
-         refetch()
+         refetch({ limit, offset: 0 })
          setMoreResults(true)
       }
       // For real time updates on profile posts
@@ -48,7 +48,7 @@ const Profile = ({ authLoading }) => {
          socket.off('updateProfilePosts', refetchAndUpdate)
       }
 
-   }, [userDetails.username, refetch, socket])
+   }, [userDetails.username, refetch, socket, limit])
 
    const loadMore = e => {
       fetchMore({
@@ -57,9 +57,13 @@ const Profile = ({ authLoading }) => {
             if (!fetchMoreResult.getProfilePosts.length) {
                setMoreResults(false)
                return prev
-            } else if (fetchMoreResult.getProfilePosts.length < limit) {
+            }
+
+            else if (fetchMoreResult.getProfilePosts.length < limit) {
                setMoreResults(false)
             }
+
+            setLimit(limit + fetchMoreResult.getProfilePosts.length + 1)
 
             return Object.assign({}, prev, {
                getProfilePosts: [...prev.getProfilePosts, ...fetchMoreResult.getProfilePosts]
@@ -116,11 +120,11 @@ const Profile = ({ authLoading }) => {
                      setMoreResults={setMoreResults}
                      owner={true}
                      profileUsername={userDetails.username}
-                     profileId={msg.profileid}
+                     profileId={data.getProfile.id}
                      key={msg.id}
                      msg={msg} />
                })}
-               {moreResults && profileMsgQueryData && profileMsgQueryData.getProfilePosts.length === 5 &&
+               {moreResults && profileMsgQueryData &&
                   <button onClick={e => loadMore()} className="btn btn--secondary loadmore">Load more</button>}
             </div>
          </div>

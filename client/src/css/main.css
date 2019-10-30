@@ -739,7 +739,7 @@
   background-color: #0b0314;
   padding: 1rem;
   width: 80%;
-  margin: auto;
+  margin: 0 auto;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: min-content 1fr;
