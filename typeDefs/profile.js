@@ -13,8 +13,8 @@ module.exports = gql`
       id: ID!
       content: String!
       username: String!
-      avatar: String!
-      profileid: ID!
+      avatar: String
+      profileid: ID
    }
 
    type ProfileWithUser {

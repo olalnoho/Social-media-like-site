@@ -32,14 +32,14 @@ module.exports = {
                   uaa.profileId,
                   pm.time_sent
                FROM profile_messages pm
-               INNER JOIN (
+               LEFT JOIN (
                   SELECT
                      username,
                      avatar,
                      p.id as profileId,
                      u.id as userId
                   FROM users u 
-                  INNER JOIN profiles p ON p.user = u.id
+                  LEFT JOIN profiles p ON p.user = u.id
                ) as uaa ON uaa.userId = pm.from_user
                WHERE pm.profile = ?
                ORDER BY pm.time_sent DESC;
@@ -86,7 +86,8 @@ module.exports = {
       },
 
       async removeProfilePost(parent, { id }, { req, db }) {
-         // @note/todo should be impossible to get here without
+         // @note
+         // should be impossible to get here without
          // having the permissions to delete; but maybe
          // *just incase*, add auth stuff here?
          const res = await db('profile_messages')

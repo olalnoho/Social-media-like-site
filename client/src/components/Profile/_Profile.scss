@@ -313,7 +313,7 @@
       }
 
       &--post {
-        grid-template-rows: min-content min-content 1fr;
+        grid-template-rows: min-content min-content min-content 1fr;
         grid-template-columns: 1fr;
 
         img {
@@ -326,10 +326,15 @@
           grid-column: 1/-1;
           margin-bottom: 1rem;
         }
+        button {
+          grid-row: 3/4;
+          grid-column: 1/-1;
+          margin-bottom: 3rem;
+        }
         p {
           margin: 0;
           text-align: center;
-          grid-row: 3/4;
+          grid-row: -2/-1;
           grid-column: 1/-1;
         }
       }

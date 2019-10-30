@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks'
 
 // Context
 import { AuthContext } from './context/AuthContext'
+import { SocketContext } from './context/SocketContext'
 
 // Components
 import Landing from './components/Landing/Landing'
@@ -12,9 +13,6 @@ import Header from './components/UI/Header/Header'
 import Login from './components/Auth/Login/Login'
 import Register from './components/Auth/Register/Register'
 import Profile from './components/Profile/Profile';
-
-// Maybe move creation to different page?
-// import ProfileCreation from './components/Profile/ProfileCreation';
 
 // Queries
 import getUser from './queries/me'
@@ -26,17 +24,19 @@ import PrivateMessages from './components/PrivateMessages/PrivateMessages';
 const App = () => {
 
   const { setIsAuth, setUserDetails } = useContext(AuthContext)
+  const { socket } = useContext(SocketContext)
   const { data, loading, refetch } = useQuery(getUser)
+  const [initLoad, setInitLoad] = useState(true)
 
-  // InitLoad:
+  // @note on initLoad
   // For protected routes
   // If I use the loading from useQuery
   // private components redirects at refresh
   // It needs to start as true.
 
-  // @todo: Maybe research better ways later.
+  // @todo 
+  // Maybe research better ways later.
 
-  const [initLoad, setInitLoad] = useState(true)
 
   useEffect(() => {
     // Authentication
@@ -50,8 +50,10 @@ const App = () => {
       setIsAuth(true)
       setInitLoad(false)
       setUserDetails(data.me)
+      // For updating profile posts and PM:s in real time.
+      socket.emit('joinOwnRoom', data.me.username)
     }
-  }, [loading, data, setUserDetails, setIsAuth])
+  }, [loading, data, setUserDetails, setIsAuth, socket])
 
   return (
     <>

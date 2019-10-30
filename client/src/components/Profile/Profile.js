@@ -76,7 +76,12 @@ const Profile = ({ authLoading }) => {
             <div className="profile__posts">
                <PostForm username={userDetails.username} profileId={data.getProfile.id} placeholder={"What's on your mind?"} />
                {profileMsgQueryData && profileMsgQueryData.getProfilePosts.map(msg => {
-                  return <ProfilePost owner={true} profileId={msg.profileid} key={msg.id} msg={msg} />
+                  return <ProfilePost
+                     owner={true}
+                     profileUsername={userDetails.username}
+                     profileId={msg.profileid}
+                     key={msg.id}
+                     msg={msg} />
                })}
             </div>
          </div>

@@ -11,6 +11,14 @@ module.exports = function (io) {
          io.emit('updateOnlineData', onlineUsers)
       })
 
+      socket.on('joinOwnRoom', username => {
+         // @note
+         // you should always be in your own room
+         // for notifying when new post on profile
+         // or if you get a PM
+         socket.join(username)
+      })
+
       socket.on('joinProfileRoom', profileRoom => {
          socket.join(profileRoom)
       })

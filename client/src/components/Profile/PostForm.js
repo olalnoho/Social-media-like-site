@@ -10,24 +10,27 @@ const PostForm = ({ placeholder, profileId, username }) => {
 
    const onSubmit = e => {
       e.preventDefault()
-      submitPost({
-         variables: { id: profileId, content: message }, refetchQueries: () => {
-            return [{ query: getProfilePosts, variables: { id: profileId } }]
-         }, awaitRefetchQueries: true
-      }).then(_ => {
-         setMessage('')
-         // Socket emits here so we can update the posts in real time.
-         // the user-socket joins the room of the profile username
-         // when Profile/OtherProfile component mounts.
-         // The username parameter is which room to emit in.
-         socket.emit('newPost', username)
-      })
+      if (message) {
+         submitPost({
+            variables: { id: profileId, content: message }, refetchQueries: () => {
+               return [{ query: getProfilePosts, variables: { id: profileId } }]
+            }, awaitRefetchQueries: true
+         }).then(_ => {
+            setMessage('')
+            // Socket emits here so we can update the posts in real time.
+            // the user-socket joins the room of the profile username
+            // when Profile/OtherProfile component mounts.
+            // The username parameter is which room to emit in.
+            socket.emit('newPost', username)
+         })
+      }
    }
 
    return (
       <div className="profile__posts__form">
          <form className="form" onSubmit={onSubmit}>
             <input
+               required
                value={message}
                onChange={e => setMessage(e.target.value)}
                type="text" placeholder={placeholder} />
