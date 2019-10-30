@@ -11,7 +11,7 @@ import ProfilePost from './ProfilePost'
 import PostForm from './PostForm'
 
 const OtherProfile = props => {
-   const limit = 5
+   const [limit, setLimit] = useState(5)
    const { data, loading, error } = useQuery(query, { variables: { id: props.match.params.id } })
    const { data: postData, refetch, fetchMore } = useQuery(postQuery, {
       variables: {
@@ -26,19 +26,23 @@ const OtherProfile = props => {
    const [moreResults, setMoreResults] = useState(true)
 
    useEffect(() => {
+
+      const refechPosts = () => {
+         refetch({ limit, offset: 0 })
+      }
       // For updating profile posts in real time
       if (data && data.getProfileById) {
          socket.emit('joinProfileRoom', data.getProfileById.username)
-         socket.on('updateProfilePosts', refetch)
+         socket.on('updateProfilePosts', refechPosts)
       }
 
       return () => {
-         socket.off('updateProfilePosts', refetch)
+         socket.off('updateProfilePosts', refechPosts)
          if (data && data.getProfileById) {
             socket.emit('leaveProfileRoom', data.getProfileById.username)
          }
       }
-   }, [data, refetch, socket])
+   }, [data, refetch, socket, limit])
 
    const loadMore = e => {
       fetchMore({
@@ -47,9 +51,13 @@ const OtherProfile = props => {
             if (!fetchMoreResult.getProfilePosts.length) {
                setMoreResults(false)
                return prev
-            } else if (fetchMoreResult.getProfilePosts.length < limit) {
-               setMoreResults(false)
             }
+
+            // else if (fetchMoreResult.getProfilePosts.length < limit) {
+            //    setMoreResults(false)
+            // }
+
+            setLimit(limit + fetchMoreResult.getProfilePosts.length + 1)
 
             return Object.assign({}, prev, {
                getProfilePosts: [...prev.getProfilePosts, ...fetchMoreResult.getProfilePosts]
@@ -128,7 +136,7 @@ const OtherProfile = props => {
                      msg={msg}
                   />
                })}
-               {moreResults && postData && postData.getProfilePosts.length === 5 &&
+               {moreResults && postData && postData.getProfilePosts.length >= limit &&
                   <button onClick={e => loadMore()} className="btn btn--secondary loadmore">Load more</button>}
             </div>
          </div>

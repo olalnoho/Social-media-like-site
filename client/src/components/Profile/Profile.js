@@ -59,9 +59,9 @@ const Profile = ({ authLoading }) => {
                return prev
             }
 
-            else if (fetchMoreResult.getProfilePosts.length < limit) {
-               setMoreResults(false)
-            }
+            // else if (fetchMoreResult.getProfilePosts.length < limit) {
+            //    setMoreResults(false)
+            // }
 
             setLimit(limit + fetchMoreResult.getProfilePosts.length + 1)
 
@@ -124,8 +124,9 @@ const Profile = ({ authLoading }) => {
                      key={msg.id}
                      msg={msg} />
                })}
-               {moreResults && profileMsgQueryData &&
-                  <button onClick={e => loadMore()} className="btn btn--secondary loadmore">Load more</button>}
+               {moreResults && profileMsgQueryData && profileMsgQueryData.getProfilePosts.length >= limit &&
+                  <button onClick={e => loadMore()} className="btn btn--secondary loadmore"> Load more</button>
+               }
             </div>
          </div>
       </div>
