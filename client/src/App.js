@@ -28,18 +28,7 @@ const App = () => {
   const { data, loading, refetch } = useQuery(getUser)
   const [initLoad, setInitLoad] = useState(true)
 
-  // @note on initLoad
-  // For protected routes
-  // If I use the loading from useQuery
-  // private components redirects at refresh
-  // It needs to start as true.
-
-  // @todo 
-  // Maybe research better ways later.
-
-
   useEffect(() => {
-    // Authentication
     if (!localStorage.getItem('token')) {
       setIsAuth(false)
       setInitLoad(false)
@@ -50,7 +39,6 @@ const App = () => {
       setIsAuth(true)
       setInitLoad(false)
       setUserDetails(data.me)
-      // For updating profile posts and PM:s in real time.
       socket.emit('joinOwnRoom', data.me.username)
     }
   }, [loading, data, setUserDetails, setIsAuth, socket])

@@ -1,17 +1,11 @@
-.loading {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .Loader {
-    height: 10rem;
-    width: 10rem;
-  }
-}
-
 .messageboard {
   width: 70%;
   margin: 2rem auto;
+  
+  &--load {
+    margin: auto;
+    margin-bottom: 2rem;
+  }
 
   .btn {
     margin: auto;
@@ -60,6 +54,7 @@
         grid-column: 1/-1;
         margin: auto;
       }
+
       margin: 2rem auto 5rem auto;
       width: 80%;
       padding: 2rem 1rem;

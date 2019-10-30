@@ -30,7 +30,7 @@ const OtherProfile = props => {
       const refechPosts = () => {
          refetch({ limit, offset: 0 })
       }
-      // For updating profile posts in real time
+
       if (data && data.getProfileById) {
          socket.emit('joinProfileRoom', data.getProfileById.username)
          socket.on('updateProfilePosts', refechPosts)
@@ -52,10 +52,6 @@ const OtherProfile = props => {
                setMoreResults(false)
                return prev
             }
-
-            // else if (fetchMoreResult.getProfilePosts.length < limit) {
-            //    setMoreResults(false)
-            // }
 
             setLimit(limit + fetchMoreResult.getProfilePosts.length + 1)
 

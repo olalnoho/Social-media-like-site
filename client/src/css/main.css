@@ -1011,27 +1011,14 @@
   }
 }
 
-.loading {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.loading .Loader {
-  height: 10rem;
-  width: 10rem;
-}
-
 .messageboard {
   width: 70%;
   margin: 2rem auto;
+}
+
+.messageboard--load {
+  margin: auto;
+  margin-bottom: 2rem;
 }
 
 .messageboard .btn {

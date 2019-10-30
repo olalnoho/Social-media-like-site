@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs')
 const getUserId = require('../utils/getUserId')
 const generateToken = require('../utils/generateToken')
-// headers is on req.req.headers
 
 module.exports = {
 

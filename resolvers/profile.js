@@ -22,9 +22,6 @@ module.exports = {
       },
 
       async getProfilePosts(parent, { id, offset, limit }, { req, db }) {
-         // @note
-         // left join because creating own profile
-         // shouldn't be necessary for posting on others.
          const res = await db.raw(`
                SELECT
                   pm.id,
@@ -91,10 +88,6 @@ module.exports = {
       },
 
       async removeProfilePost(parent, { id }, { req, db }) {
-         // @note
-         // should be impossible to get here without
-         // having the permissions to delete; but maybe
-         // *just incase*, add auth stuff here?
          const res = await db('profile_messages')
             .delete()
             .where({ id })

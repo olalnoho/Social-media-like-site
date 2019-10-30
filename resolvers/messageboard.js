@@ -3,13 +3,6 @@ const getUserId = require('../utils/getUserId')
 module.exports = {
    Query: {
       async getMessages(parent, args, { db }) {
-
-         // return db('message_board')
-         //    .select('profile.avatar', 'users.username', 'message_board.content', 'profile.id as pid', 'message_board.id as mid')
-         //    .join('users', 'message_board.user', 'users.id')
-         //    .join('profile', 'profile.user', 'users.id')
-         //    .orderBy('message_board.time_sent', 'desc')
-
          const res = await db.raw(`
             SELECT 
                p.avatar, u.username, m.content, p.id AS pid, m.id AS mid 

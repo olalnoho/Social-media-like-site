@@ -5,8 +5,6 @@ import mutation from '../../queries/updateProfile'
 import getProfile from '../../queries/getProfile'
 import { Redirect } from 'react-router-dom'
 
-// ({ location: { state: { data: profileData } }, authLoading })
-
 const EditProfile = ({ location, authLoading }) => {
    const { isAuth } = useContext(AuthContext)
    const [udpateProfile, { data, error }] = useMutation(mutation)
@@ -27,14 +25,11 @@ const EditProfile = ({ location, authLoading }) => {
       })
    }
 
-   // data is only true when mutation completed successfully
-   // When update completed, return to profile
    if (data) {
       return <Redirect to='/profile' />
    }
 
-   // If you did not come from the button-redirect on /profile, go back to homepage 
-   // also this is here instead of top because you cannot call useState conditionally
+   // If you did not come from the button-redirect on /profile, go back to homepage
    if (!location.state) {
       return <Redirect to="/" />
    }
@@ -47,12 +42,6 @@ const EditProfile = ({ location, authLoading }) => {
       <div className="container flex">
          <div className="profilecreation">
             {error && <p className="alert"> Something went wrong.. try again </p>}
-            {
-               /* 
-                  There shouldn't really be any errors in this component,
-                  But just in case.
-               */
-            }
             <div className="profilecreation__heading">
                <h2 className="heading-2">Edit Profile</h2>
                <p className="lead">
@@ -69,7 +58,7 @@ const EditProfile = ({ location, authLoading }) => {
                <input
                   value={formData.avatar}
                   type="text"
-                  placeholder="URL to avatar you'd like to use   -   e.g. https://imagesite.com/picture2.jpeg"
+                  placeholder="URL to avatar you'd like to use."
                   onChange={e => setFormData({ ...formData, avatar: e.target.value })}
                />
                <textarea

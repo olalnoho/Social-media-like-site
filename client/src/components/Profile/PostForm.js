@@ -17,10 +17,6 @@ const PostForm = ({ placeholder, profileId, username, setMoreResults }) => {
             }, awaitRefetchQueries: true
          }).then(_ => {
             setMessage('')
-            // Socket emits here so we can update the posts in real time.
-            // the user-socket joins the room of the profile username
-            // when Profile/OtherProfile component mounts.
-            // The username parameter is which room to emit in.
             socket.emit('newPost', username)
             setMoreResults(true)
          })

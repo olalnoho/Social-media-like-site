@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import deleteMessageMutation from '../../queries/deleteMessage'
 import Spinner from '../UI/Spinner/Spinner'
 
-const defaultAvatar = "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png"
+const defaultAvatar = "http://www.iconsalot.com/asset/icons/freepik/electronic-commerce/128/user-avatar-profile-icon.png"
 const Message = ({ msg }) => {
    const [deleteMessage, { loading }] = useMutation(deleteMessageMutation)
    const { userDetails } = useContext(AuthContext)

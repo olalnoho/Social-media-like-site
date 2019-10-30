@@ -5,8 +5,6 @@ import { Redirect, Link } from 'react-router-dom'
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 
 import getProfile from '../../queries/getProfile'
-// getProfileMessages is a seperate query from getProfile so 
-// we don't have to refetch the entire profile when refetching posts.
 import getProfilePosts from '../../queries/getProfilePosts'
 import ProfileCreation from './ProfileCreation'
 
@@ -22,7 +20,6 @@ const Profile = ({ authLoading }) => {
    const [profileMsgQuery, { data: profileMsgQueryData, refetch, fetchMore }] = useLazyQuery(getProfilePosts)
 
    useEffect(() => {
-      // Fetch posts for the profile
       if (data && data.getProfile !== null) {
          profileMsgQuery({
             variables: {
@@ -39,7 +36,6 @@ const Profile = ({ authLoading }) => {
          refetch({ limit, offset: 0 })
          setMoreResults(true)
       }
-      // For real time updates on profile posts
       if (userDetails.username) {
          socket.on('updateProfilePosts', refetchAndUpdate)
       }
@@ -58,10 +54,6 @@ const Profile = ({ authLoading }) => {
                setMoreResults(false)
                return prev
             }
-
-            // else if (fetchMoreResult.getProfilePosts.length < limit) {
-            //    setMoreResults(false)
-            // }
 
             setLimit(limit + fetchMoreResult.getProfilePosts.length + 1)
 
