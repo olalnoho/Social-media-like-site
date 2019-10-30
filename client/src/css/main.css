@@ -1011,6 +1011,24 @@
   }
 }
 
+.loading {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.loading .Loader {
+  height: 10rem;
+  width: 10rem;
+}
+
 .messageboard {
   width: 70%;
   margin: 2rem auto;
@@ -1073,6 +1091,9 @@
 }
 
 .messageboard__messages {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   margin-top: 5rem;
 }
 
@@ -1090,6 +1111,12 @@
       grid-template-rows: min-content min-content min-content max-content;
   -ms-grid-columns: 20rem 1fr;
       grid-template-columns: 20rem 1fr;
+}
+
+.messageboard__messages--msg .Loader {
+  grid-row: 1/-1;
+  grid-column: 1/-1;
+  margin: auto;
 }
 
 .messageboard__messages--msg img {

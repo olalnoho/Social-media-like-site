@@ -51,16 +51,15 @@ const Header = ({ authLoading, ...router }) => {
    }
    return (
       <header className="header">
-         {!authLoading && <>
-            <div className="header__info">
-               <Link to="/"><i className="fab fa-centos"></i></Link>
-               <h2>Bestest site ever</h2>
-            </div>
-            <nav className="header__nav">
-               <ul className="header__list">
-                  {links}
-               </ul>
-            </nav>
+         <div className="header__info">
+            <Link to="/"><i className="fab fa-centos"></i></Link>
+            <h2>Bestest site ever</h2>
+         </div>
+         {!authLoading && <><nav className="header__nav">
+            <ul className="header__list">
+               {links}
+            </ul>
+         </nav>
          </>
          }
       </header>
