@@ -79,7 +79,7 @@ const Profile = ({ authLoading }) => {
                   return <ProfilePost
                      owner={true}
                      profileUsername={userDetails.username}
-                     profileId={msg.profileid}
+                     profileId={data.getProfile.id}
                      key={msg.id}
                      msg={msg} />
                })}
