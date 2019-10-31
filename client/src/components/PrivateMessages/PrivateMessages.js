@@ -1,16 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 
 import getPMs from '../../queries/getPrivateMessages'
 import PrivateMessage from './PrivateMessage'
+
+import Modal from '../UI/Modal/Modal'
+import Conversation from './Conversation'
 const PrivateMessages = () => {
    const { data, loading } = useQuery(getPMs)
-   if(loading) {
+   const [showModal, setShowModal] = useState(true)
+   const [selectedUser, setSelectedUser] = useState(null)
+   if (loading) {
       return <div className="container flexcolumn"></div>
    }
 
    return (
-      <div className="container flexcolumn">
+      <div className="container flexcolumn" onClick={e => {
+         setSelectedUser(null)
+      }}>
+         {selectedUser && <Modal>
+            <Conversation id={selectedUser.id} username={selectedUser.username} />
+         </Modal>}
          <div className="privatemessages">
             <div className="privatemessages__heading">
                <h2 className="heading-2">
@@ -19,7 +29,7 @@ const PrivateMessages = () => {
             </div>
             <div className="privatemessages__msgs">
                {data && data.getPrivateMessagesWithUniqueUsers.map(msg => {
-                  return <PrivateMessage key={msg.id} msg={msg} />
+                  return <PrivateMessage selectUser={setSelectedUser} key={msg.id} msg={msg} />
                })}
             </div>
          </div>

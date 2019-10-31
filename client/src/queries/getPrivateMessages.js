@@ -9,6 +9,7 @@ const getMessages = gql`
          avatar
          time_sent
          read
+         userid
       }
    }
 `

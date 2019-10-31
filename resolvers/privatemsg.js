@@ -11,20 +11,19 @@ module.exports = {
 
       async getPrivateMessagesWithUniqueUsers(parent, args, { db, req }) {
          const userId = getUserId(req.req)
-         
+
          const res = await db.raw(`
          SELECT
             private_messages.id,
             time_sent,
             p1.avatar,
             u1.username,
+            u1.id as userId,
             content,
             read
          FROM private_messages
          INNER JOIN users u1 ON u1.id = private_messages.from_user
-         INNER JOIN users u2 ON u2.id = private_messages.to_user
          LEFT JOIN profiles p1 ON p1.user = u1.id
-         LEFT JOIN profiles p2 ON p2.user = u2.id
          WHERE to_user = ? AND time_sent IN (
             SELECT
                MAX(time_sent)
@@ -33,7 +32,26 @@ module.exports = {
          );`, userId)
 
          return res.rows
+      },
+
+      async getWholeConversation(parent, { id }, { req, db }) {
+         const userId = getUserId(req.req)
+         const res = await db.raw(`
+         SELECT
+            pm.id,
+            u.username,
+            p.avatar,
+            content
+         FROM private_messages pm
+         INNER JOIN users u ON u.id = pm.from_user
+         LEFT JOIN profiles p ON p.user = pm.from_user
+         WHERE (to_user = ? AND from_user = ?)
+         OR (from_user = ? AND to_user = ?)
+         ORDER BY time_sent DESC;
+         `, [userId, id, userId, id])
+         return res.rows
       }
+      
    },
 
    Mutation: {

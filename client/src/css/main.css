@@ -1287,6 +1287,37 @@
   }
 }
 
+.conversation {
+  background-color: #160a24;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.conversation__msgs {
+  margin: 0.5rem;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-shadow: inset 0.3rem 0.4rem 0.2rem #0b0314, inset -0.3rem -0.4rem 0.2rem #0b0314;
+          box-shadow: inset 0.3rem 0.4rem 0.2rem #0b0314, inset -0.3rem -0.4rem 0.2rem #0b0314;
+  background-color: #1a072f;
+}
+
+.conversation h3 {
+  margin: 0;
+  text-align: center;
+  padding: 3rem;
+  background-color: #220820;
+  border-bottom: 2px solid blanchedalmond;
+}
+
 .privatemessages {
   width: 80%;
   -webkit-box-flex: 1;
@@ -1325,11 +1356,22 @@
 }
 
 .privatemessages__msgs--msg {
+  position: relative;
   -ms-grid-rows: (min-content)[4];
       grid-template-rows: repeat(4, -webkit-min-content);
       grid-template-rows: repeat(4, min-content);
   -ms-grid-columns: 20rem 1fr;
       grid-template-columns: 20rem 1fr;
+}
+
+.privatemessages__msgs--msg .unread {
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  background-color: crimson;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
 }
 
 .privatemessages__msgs--msg span {
@@ -1427,7 +1469,7 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 50%;
+  width: 60%;
   height: 70%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
