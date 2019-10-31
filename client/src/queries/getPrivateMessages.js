@@ -2,14 +2,13 @@ import { gql } from 'apollo-boost'
 
 const getMessages = gql`
    query {
-      getPrivateMessages {
+      getPrivateMessagesWithUniqueUsers {
          id
-         content
-         from_user {
-            username
-            avatar
-         }
+         content         
+         username
+         avatar
          time_sent
+         read
       }
    }
 `

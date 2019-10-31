@@ -1323,13 +1323,17 @@
 }
 
 .privatemessages__msgs--msg {
-  width: 100%;
+  background-color: #160a24;
+  min-height: 20rem;
+  border: 2px solid blanchedalmond;
+  padding: 2rem 1rem;
+  width: 80%;
   min-height: 20rem;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: max-content 1fr min-content;
-      grid-template-rows: -webkit-max-content 1fr -webkit-min-content;
-      grid-template-rows: max-content 1fr min-content;
+  -ms-grid-rows: min-content max-content 1fr min-content;
+      grid-template-rows: -webkit-min-content -webkit-max-content 1fr -webkit-min-content;
+      grid-template-rows: min-content max-content 1fr min-content;
   -ms-grid-columns: max-content 10rem 1fr;
       grid-template-columns: -webkit-max-content 10rem 1fr;
       grid-template-columns: max-content 10rem 1fr;
@@ -1338,6 +1342,21 @@
 .privatemessages__msgs--msg img {
   height: 10rem;
   width: auto;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.privatemessages__msgs--msg h3 {
+  font-size: 2rem;
+  margin: 0;
+  -ms-grid-column-align: center;
+      justify-self: center;
   -ms-grid-row: 1;
   -ms-grid-row-span: 1;
   grid-row: 1/2;
@@ -1346,32 +1365,45 @@
   grid-column: 1/2;
 }
 
-.privatemessages__msgs--msg h3 {
+.privatemessages__msgs--msg span {
+  margin-left: 2rem;
+  padding-left: 1rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  display: block;
   -ms-grid-row: 1;
   -ms-grid-row-span: 1;
   grid-row: 1/2;
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 1;
-  grid-column: 2/3;
+  grid-column: 2/-1;
 }
 
 .privatemessages__msgs--msg p {
-  -ms-grid-column-align: center;
-      justify-self: center;
-  -ms-grid-row: 2;
-  -ms-grid-row-span: 1;
-  grid-row: 2/3;
-  grid-column: 1/-1;
+  white-space: pre-line;
+  -webkit-box-shadow: inset 0.2rem 0.3rem 0.2rem #0b0314, inset -0.2rem -0.3rem 0.2rem #0b0314;
+          box-shadow: inset 0.2rem 0.3rem 0.2rem #0b0314, inset -0.2rem -0.3rem 0.2rem #0b0314;
+  background-color: #17062a;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-top: 2rem;
+  margin-left: 2rem;
+  line-height: 2rem;
+  grid-row: 2/-2;
+  grid-column: 2/-1;
 }
 
 .privatemessages__msgs--msg button {
+  margin-top: 1rem;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
   -ms-grid-column-align: center;
       justify-self: center;
   grid-row: -2/-1;
-  grid-column: 1/-1;
+  grid-column: 2/-1;
+}
+
+.privatemessages__msgs--msg:not(:last-child) {
+  margin-bottom: 2rem;
 }
 
 .Loader {
