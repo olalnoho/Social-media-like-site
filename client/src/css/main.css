@@ -115,9 +115,9 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #444;
+  background: #222;
   border-radius: 3px;
-  border: 1px solid blanchedalmond;
+  border: 2px solid #444;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -1391,6 +1391,18 @@
   width: 100%;
   border-left: none;
   border-right: none;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.conversation .form input[type=text] {
+  border: none;
+  background-color: #160a24;
+  margin: 0;
+  margin-right: 3rem;
+  padding-left: 1rem;
 }
 
 .privatemessages {
@@ -1443,7 +1455,8 @@
   position: absolute;
   top: -1rem;
   left: -1rem;
-  background-color: crimson;
+  background-color: mediumseagreen;
+  border: 2px solid blanchedalmond;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
