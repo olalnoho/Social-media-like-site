@@ -19,7 +19,7 @@
     background-color: lighten($main-bg, 6%);
     
     &--msg {
-      border-radius: 3rem;
+      border-radius: 1rem;
       margin-top: 2rem;
       margin-bottom: 2rem;
       p {
@@ -38,9 +38,11 @@
       margin-right: auto;
       margin-left: 1rem;
       background-color: darken($main-lighter, 1%);
+      border: 2px solid lighten($main-bg, 10%);
     }
     
     .me {
+      border: 2px solid darken($main-lighter, 1%);
       margin-left: auto;
       margin-right: 1rem;
       background-color: lighten($main-bg, 10%);

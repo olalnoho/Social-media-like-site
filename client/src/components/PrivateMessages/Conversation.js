@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import getMsgs from '../../queries/getWholeConversation'
 import Spinner from '../UI/Spinner/Spinner'
-const Conversation = React.memo(({ id, username }) => {
+const Conversation = ({ id, username }) => {
    const { data, loading } = useQuery(getMsgs, { variables: { id } })
    return (
       <div className="conversation">
@@ -24,6 +24,6 @@ const Conversation = React.memo(({ id, username }) => {
          </form>
       </div>
    )
-})
+}
 
-export default Conversation
+export default React.memo(Conversation)
