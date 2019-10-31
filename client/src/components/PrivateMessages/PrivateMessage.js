@@ -15,7 +15,7 @@ const PrivateMessage = ({ msg }) => {
          <p className="lead">
             {msg.content}
          </p>
-         <button className="btn btn--primary">
+         <button className="btn btn--secondary">
             View message history
          </button>
       </div>
