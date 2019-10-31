@@ -7,4 +7,17 @@
   height: 70%;
   transform: translate(-50%, -50%);
   z-index: 1;
+  animation-name: fade-in;
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.42,0,0.58,1);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

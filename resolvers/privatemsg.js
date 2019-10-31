@@ -28,8 +28,9 @@ module.exports = {
             SELECT
                MAX(time_sent)
             FROM private_messages pm
-            GROUP BY pm.from_user
-         );`, userId)
+            GROUP BY pm.from_user)
+            ORDER BY time_sent DESC;
+            `, userId)
 
          return res.rows
       },
@@ -51,7 +52,7 @@ module.exports = {
          `, [userId, id, userId, id])
          return res.rows
       }
-      
+
    },
 
    Mutation: {
