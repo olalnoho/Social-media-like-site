@@ -17,7 +17,7 @@
     flex: 0.95;
     box-shadow: inset 0.3rem 0.4rem 0.2rem $main-bg, inset -0.3rem -0.4rem 0.2rem $main-bg;
     background-color: lighten($main-bg, 6%);
-    
+
     &--msg {
       border-radius: 1rem;
       margin-top: 2rem;
@@ -28,7 +28,8 @@
       }
     }
 
-    .other, .me {
+    .other,
+    .me {
       padding: 1rem;
       width: 50%;
       text-align: center;
@@ -40,7 +41,7 @@
       background-color: darken($main-lighter, 1%);
       border: 2px solid lighten($main-bg, 10%);
     }
-    
+
     .me {
       border: 2px solid darken($main-lighter, 1%);
       margin-left: auto;
@@ -68,12 +69,19 @@
     border-right: none;
     flex-direction: row;
 
-    input[type=text] {
+    input[type="text"] {
       border: none;
-      background-color: $main-lighter;
+      background-color: lighten($main-lighter, 2%);
       margin: 0;
       margin-right: 3rem;
       padding-left: 1rem;
+
+      &::placeholder {
+        opacity: 0.7;
+      }
+    }
+    input[type="submit"] {
+      align-self: center;
     }
   }
 }

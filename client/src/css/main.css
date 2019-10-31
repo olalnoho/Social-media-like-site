@@ -1353,7 +1353,8 @@
   padding: 1rem;
 }
 
-.conversation__msgs .other, .conversation__msgs .me {
+.conversation__msgs .other,
+.conversation__msgs .me {
   padding: 1rem;
   width: 50%;
   text-align: center;
@@ -1397,12 +1398,34 @@
           flex-direction: row;
 }
 
-.conversation .form input[type=text] {
+.conversation .form input[type="text"] {
   border: none;
-  background-color: #160a24;
+  background-color: #1b0c2c;
   margin: 0;
   margin-right: 3rem;
   padding-left: 1rem;
+}
+
+.conversation .form input[type="text"]::-webkit-input-placeholder {
+  opacity: 0.7;
+}
+
+.conversation .form input[type="text"]:-ms-input-placeholder {
+  opacity: 0.7;
+}
+
+.conversation .form input[type="text"]::-ms-input-placeholder {
+  opacity: 0.7;
+}
+
+.conversation .form input[type="text"]::placeholder {
+  opacity: 0.7;
+}
+
+.conversation .form input[type="submit"] {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .privatemessages {

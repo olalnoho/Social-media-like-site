@@ -11,7 +11,8 @@ module.exports = {
 
       async getPrivateMessagesWithUniqueUsers(parent, args, { db, req }) {
          const userId = getUserId(req.req)
-
+         //@note
+         // have another look at this query
          const res = await db.raw(`
          SELECT
             private_messages.id,
@@ -28,9 +29,10 @@ module.exports = {
             SELECT
                MAX(time_sent)
             FROM private_messages pm
+            WHERE to_user = ?
             GROUP BY pm.from_user)
             ORDER BY time_sent DESC;
-            `, userId)
+            `, [userId, userId])
 
          return res.rows
       },
