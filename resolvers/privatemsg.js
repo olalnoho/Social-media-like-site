@@ -41,6 +41,7 @@ module.exports = {
          SELECT
             pm.id,
             u.username,
+            u.id AS userid,
             p.avatar,
             content
          FROM private_messages pm
@@ -48,7 +49,7 @@ module.exports = {
          LEFT JOIN profiles p ON p.user = pm.from_user
          WHERE (to_user = ? AND from_user = ?)
          OR (from_user = ? AND to_user = ?)
-         ORDER BY time_sent DESC;
+         ORDER BY time_sent ASC;
          `, [userId, id, userId, id])
          return res.rows
       }

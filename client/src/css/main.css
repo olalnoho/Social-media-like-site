@@ -106,6 +106,24 @@
   background-color: #960e29;
 }
 
+::-webkit-scrollbar {
+  width: 1.2rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0314;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1b0c2c;
+  border-radius: 10rem;
+}
+
 .landing {
   color: white;
   -webkit-box-flex: 1;
@@ -1287,6 +1305,10 @@
   }
 }
 
+.conversationModal {
+  height: 90% !important;
+}
+
 .conversation {
   background-color: #160a24;
   width: 100%;
@@ -1301,6 +1323,14 @@
 }
 
 .conversation__msgs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow-y: auto;
   width: 98%;
   margin: auto;
   -webkit-box-flex: 0.95;
@@ -1311,12 +1341,53 @@
   background-color: #1a072f;
 }
 
+.conversation__msgs--msg {
+  border-radius: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.conversation__msgs--msg p {
+  white-space: pre-line;
+  padding: 1rem;
+}
+
+.conversation__msgs .other, .conversation__msgs .me {
+  padding: 1rem;
+  width: 50%;
+  text-align: center;
+}
+
+.conversation__msgs .other {
+  margin-right: auto;
+  margin-left: 1rem;
+  background-color: #140920;
+}
+
+.conversation__msgs .me {
+  margin-left: auto;
+  margin-right: 1rem;
+  background-color: #230a40;
+}
+
+.conversation__msgs .Loader {
+  width: 10rem;
+  height: 10rem;
+}
+
 .conversation h3 {
   margin: 0;
   text-align: center;
   padding: 3rem;
   background-color: #220820;
   border-bottom: 2px solid blanchedalmond;
+}
+
+.conversation .form {
+  background-color: #0b0314;
+  width: 100%;
+  border-left: none;
+  border-right: none;
 }
 
 .privatemessages {

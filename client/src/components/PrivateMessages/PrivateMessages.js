@@ -7,7 +7,7 @@ import PrivateMessage from './PrivateMessage'
 import Modal from '../UI/Modal/Modal'
 import Conversation from './Conversation'
 const PrivateMessages = () => {
-   const { data, loading } = useQuery(getPMs)
+   const { data, loading } = useQuery(getPMs, {fetchPolicy: 'network-only'})
    const [showModal, setShowModal] = useState(true)
    const [selectedUser, setSelectedUser] = useState(null)
    if (loading) {
@@ -18,7 +18,7 @@ const PrivateMessages = () => {
       <div className="container flexcolumn" onClick={e => {
          setSelectedUser(null)
       }}>
-         {selectedUser && <Modal>
+         {selectedUser && <Modal extraClass="conversationModal">
             <Conversation id={selectedUser.id} username={selectedUser.username} />
          </Modal>}
          <div className="privatemessages">
