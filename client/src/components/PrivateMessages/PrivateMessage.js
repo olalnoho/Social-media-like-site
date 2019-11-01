@@ -1,14 +1,16 @@
 import React from 'react'
-
+const defaultAvatar = "http://www.iconsalot.com/asset/icons/freepik/electronic-commerce/128/user-avatar-profile-icon.png"
 const PrivateMessage = ({ msg, selectUser }) => {
+
    let cName = "privatemessages__msgs--msg"
    if (!msg.read) {
       cName += ' unread'
    }
+
    return (
       <div className={cName}>
          {!msg.read && <div className="unread"></div>}
-         <img src={msg.avatar} alt="avatar" />
+         <img src={msg.avatar ? msg.avatar : defaultAvatar} alt="avatar" />
          <h3 className="heading-3">
             {msg.username}
          </h3>

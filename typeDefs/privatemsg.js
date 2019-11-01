@@ -17,6 +17,13 @@ module.exports = gql`
       userid: ID
    }
 
+   type privateMessage3 {
+      id: ID!
+      username: String!
+      content: String!
+      uid: ID
+   }
+
    type privateMessage {
       id: ID!
       from_user: UserWithAvatar!
@@ -28,7 +35,7 @@ module.exports = gql`
    extend type Query {
       getPrivateMessages: [privateMessage!]!
       getPrivateMessagesWithUniqueUsers: [privateMessage2!]!
-      getWholeConversation(id: ID!): [privateMessage2!]!
+      getWholeConversation(id: ID!): [privateMessage3!]!
    }
 
    extend type Mutation {

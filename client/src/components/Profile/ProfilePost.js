@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks'
 import deleteProfilePostMutation from '../../queries/deleteProfilePost'
 import getProfilePosts from '../../queries/getProfilePosts'
 import { Link } from 'react-router-dom'
-const defaultAvatar = "https://www.seekpng.com/png/full/428-4287240_no-avatar-user-circle-icon-png.png"
+const defaultAvatar = "http://www.iconsalot.com/asset/icons/freepik/electronic-commerce/128/user-avatar-profile-icon.png"
 const ProfilePost = ({ msg, owner, profileId, profileUsername, setMoreResults }) => {
    const { userDetails } = useContext(AuthContext)
    const { socket } = useContext(SocketContext)

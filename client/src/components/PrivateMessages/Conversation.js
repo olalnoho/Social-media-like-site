@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import getMsgs from '../../queries/getWholeConversation'
 import sendMsg from '../../queries/sendPrivateMessage'
+import getUniquePms from '../../queries/getPrivateMessages'
 import Spinner from '../UI/Spinner/Spinner'
 const Conversation = ({ id, username }) => {
    const [content, setContent] = useState('')
@@ -17,7 +18,8 @@ const Conversation = ({ id, username }) => {
       e.preventDefault()
       send({
          variables: { to: id, content }, refetchQueries: () => [
-            { query: getMsgs, variables: { id } }
+            { query: getMsgs, variables: { id } },
+            { query: getUniquePms }
          ], awaitRefetchQueries: true
       }).then(_ => {
          // autoscroll
@@ -36,7 +38,7 @@ const Conversation = ({ id, username }) => {
             {loading ? <Spinner /> : data && data.getWholeConversation.map(msg => {
                return <div
                   key={msg.id}
-                  className={'conversation__msgs--msg ' + (msg.userid === id ? 'other' : 'me')}>
+                  className={'conversation__msgs--msg ' + (msg.uid === id ? 'other' : 'me')}>
                   <p className="lead"> {msg.content} </p>
                </div>
             })}

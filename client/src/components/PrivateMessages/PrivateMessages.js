@@ -6,8 +6,9 @@ import PrivateMessage from './PrivateMessage'
 
 import Modal from '../UI/Modal/Modal'
 import Conversation from './Conversation'
+
 const PrivateMessages = () => {
-   const { data, loading } = useQuery(getPMs, {fetchPolicy: 'network-only'})
+   const { data, loading } = useQuery(getPMs, { fetchPolicy: 'network-only' })
    const [selectedUser, setSelectedUser] = useState(null)
    if (loading) {
       return <div className="container flexcolumn"></div>
