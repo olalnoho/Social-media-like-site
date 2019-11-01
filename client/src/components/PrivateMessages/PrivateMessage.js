@@ -14,7 +14,7 @@ const PrivateMessage = ({ msg, selectUser }) => {
          <h3 className="heading-3">
             {msg.username}
          </h3>
-         <span>Last Message: </span>
+         <span>Last Message, sent by {msg.sent_by} </span>
          <p className="lead">
             {msg.content}
          </p>

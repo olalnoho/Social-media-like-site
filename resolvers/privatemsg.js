@@ -20,25 +20,28 @@ module.exports = {
                u.username,
                u.id as userId,
                content,
-               read
+               read,
+               u2.username AS sent_by
             FROM private_messages pm
             INNER JOIN users u ON (
                pm.from_user = ? AND pm.to_user = u.id
                OR
                pm.to_user = ? AND pm.from_user = u.id
-               ) 
+               )
             LEFT JOIN profiles p ON (
                pm.from_user = ? AND pm.to_user = p.user
                OR
                pm.to_user = ? AND pm.from_user = p.user
-               ) 
+               )
+            INNER JOIN users u2 ON u2.id = pm.from_user
             WHERE time_sent IN (
                SELECT
                   MAX(time_sent)
                FROM private_messages
                WHERE to_user = ? OR from_user = ?
-               GROUP BY least(from_user, to_user), greatest(to_user, from_user)
-         );`, [userId, userId, userId, userId, userId, userId])
+               GROUP BY least(from_user, to_user), greatest(to_user, from_user))
+            ORDER BY time_sent DESC;`
+            , [userId, userId, userId, userId, userId, userId])
 
          return res.rows
       },
@@ -86,12 +89,10 @@ module.exports = {
 
       async markAsRead(parent, { id }, { req, db }) {
          const userId = getUserId(req.req)
-         const res = await db('private_messages').update({
-            read: true
-         }).where({ from_user: id, to_user: userId })
+         const res = await db('private_messages').update({ read: true })
+            .where({ from_user: id, to_user: userId })
             .orWhere({ from_user: userId, to_user: id })
-         
-         console.log(res)
+
          return res
       }
    }

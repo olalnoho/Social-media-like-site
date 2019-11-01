@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import getMsgs from '../../queries/getWholeConversation'
 import sendMsg from '../../queries/sendPrivateMessage'
+import markAsRead from '../../queries/markPmsAsRead'
 import getUniquePms from '../../queries/getPrivateMessages'
 import Spinner from '../UI/Spinner/Spinner'
 const Conversation = ({ id, username }) => {
@@ -9,6 +10,19 @@ const Conversation = ({ id, username }) => {
 
    const [send] = useMutation(sendMsg)
    const { data, loading } = useQuery(getMsgs, { variables: { id } })
+   const [mark] = useMutation(markAsRead)
+
+   useEffect(() => {
+      
+      mark({
+         variables: { id }, refetchQueries: () => [
+            { query: getUniquePms }
+         ]
+      })
+
+      const msgBox = document.querySelector('.conversation__msgs')
+      msgBox.scrollTop = msgBox.scrollHeight
+   }, [id, mark])
 
    const onSubmit = e => {
 
@@ -29,6 +43,7 @@ const Conversation = ({ id, username }) => {
          setContent('')
       })
    }
+
    return (
       <div className="conversation">
          <h3 className="heading-3">

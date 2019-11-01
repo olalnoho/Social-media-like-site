@@ -10,6 +10,7 @@ const getMessages = gql`
          time_sent
          read
          userid
+         sent_by
       }
    }
 `
