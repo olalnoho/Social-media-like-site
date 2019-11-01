@@ -40,6 +40,7 @@ module.exports = gql`
 
    extend type Mutation {
       sendPrivateMessage(to: ID! content: String!): privateMessage!
+      markAsRead(id: ID!): Int!
    }
 
 `
