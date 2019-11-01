@@ -10,12 +10,10 @@ const Conversation = ({ id, username }) => {
    const { data, loading } = useQuery(getMsgs, { variables: { id } })
 
    const onSubmit = e => {
-      const msgBox = document.querySelector('.conversation__msgs')
 
-      const sh = msgBox.scrollHeight
-      const oh = msgBox.offsetHeight
-      const st = msgBox.scrollTop
-      console.log(sh)
+      const msgBox = document.querySelector('.conversation__msgs')
+      const { scrollHeight: sh, offsetHeight: oh, scrollTop: st } = msgBox
+
       e.preventDefault()
       send({
          variables: { to: id, content }, refetchQueries: () => [
@@ -23,9 +21,10 @@ const Conversation = ({ id, username }) => {
          ], awaitRefetchQueries: true
       }).then(_ => {
          // autoscroll
-         if (st + oh > sh - 200) {
+         if (st + oh > sh - 150) {
             msgBox.scrollTop = sh
          }
+         setContent('')
       })
    }
    return (
