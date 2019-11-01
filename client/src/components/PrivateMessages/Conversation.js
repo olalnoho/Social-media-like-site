@@ -38,7 +38,7 @@ const Conversation = ({ id, username }) => {
             {loading ? <Spinner /> : data && data.getWholeConversation.map(msg => {
                return <div
                   key={msg.id}
-                  className={'conversation__msgs--msg ' + (msg.uid === id ? 'other' : 'me')}>
+                  className={'conversation__msgs--msg ' + (msg.userid === id ? 'other' : 'me')}>
                   <p className="lead"> {msg.content} </p>
                </div>
             })}

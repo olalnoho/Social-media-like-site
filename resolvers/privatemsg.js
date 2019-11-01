@@ -71,7 +71,7 @@ module.exports = {
          SELECT
             pm.id,
             u.username,
-            u.id AS UID,
+            u.id AS userid,
             content
          FROM private_messages pm
          INNER JOIN users u ON u.id = pm.from_user

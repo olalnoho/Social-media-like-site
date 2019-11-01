@@ -14,14 +14,14 @@ module.exports = gql`
       username: String!
       avatar: String
       content: String!
-      userid: ID
+      userid: ID!
    }
 
    type privateMessage3 {
       id: ID!
       username: String!
       content: String!
-      uid: ID
+      userid: ID!
    }
 
    type privateMessage {

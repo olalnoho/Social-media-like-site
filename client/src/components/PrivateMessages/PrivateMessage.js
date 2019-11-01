@@ -31,4 +31,4 @@ const PrivateMessage = ({ msg, selectUser }) => {
    )
 }
 
-export default PrivateMessage
+export default React.memo(PrivateMessage)

@@ -5,7 +5,7 @@ const query = gql`
       getWholeConversation(id: $id) {
          username
          content
-         uid
+         userid
          id
       }
    }
