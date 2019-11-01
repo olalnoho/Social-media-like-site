@@ -1,9 +1,33 @@
-import React from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import React, { useState } from 'react'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import getMsgs from '../../queries/getWholeConversation'
+import sendMsg from '../../queries/sendPrivateMessage'
 import Spinner from '../UI/Spinner/Spinner'
 const Conversation = ({ id, username }) => {
+   const [content, setContent] = useState('')
+
+   const [send] = useMutation(sendMsg)
    const { data, loading } = useQuery(getMsgs, { variables: { id } })
+
+   const onSubmit = e => {
+      const msgBox = document.querySelector('.conversation__msgs')
+
+      const sh = msgBox.scrollHeight
+      const oh = msgBox.offsetHeight
+      const st = msgBox.scrollTop
+      console.log(sh)
+      e.preventDefault()
+      send({
+         variables: { to: id, content }, refetchQueries: () => [
+            { query: getMsgs, variables: { id } }
+         ], awaitRefetchQueries: true
+      }).then(_ => {
+         // autoscroll
+         if (st + oh > sh - 200) {
+            msgBox.scrollTop = sh
+         }
+      })
+   }
    return (
       <div className="conversation">
          <h3 className="heading-3">
@@ -14,12 +38,12 @@ const Conversation = ({ id, username }) => {
                return <div
                   key={msg.id}
                   className={'conversation__msgs--msg ' + (msg.userid === id ? 'other' : 'me')}>
-                     <p className="lead"> {msg.content} </p>
+                  <p className="lead"> {msg.content} </p>
                </div>
             })}
          </div>
-         <form className="form">
-            <input type="text" />
+         <form className="form" onSubmit={onSubmit}>
+            <input type="text" value={content} onChange={e => setContent(e.target.value)} />
             <input type="submit" className="btn btn--primary" />
          </form>
       </div>
