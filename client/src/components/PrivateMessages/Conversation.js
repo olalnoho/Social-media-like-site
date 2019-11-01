@@ -19,10 +19,13 @@ const Conversation = ({ id, username }) => {
             { query: getUniquePms }
          ]
       })
-
+      // Scroll to last messages
+   }, [id, mark])
+   
+   useEffect(() => {
       const msgBox = document.querySelector('.conversation__msgs')
       msgBox.scrollTop = msgBox.scrollHeight
-   }, [id, mark])
+   }, [data])
 
    const onSubmit = e => {
 

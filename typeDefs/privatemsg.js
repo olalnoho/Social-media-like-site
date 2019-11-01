@@ -15,7 +15,8 @@ module.exports = gql`
       avatar: String
       content: String!
       userid: ID!
-      sent_by: String!
+      sent_by_username: String!
+      sent_by_id: ID!
    }
 
    type privateMessage3 {

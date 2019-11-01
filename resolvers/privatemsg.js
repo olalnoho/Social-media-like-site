@@ -21,7 +21,8 @@ module.exports = {
                u.id as userId,
                content,
                read,
-               u2.username AS sent_by
+               u2.username AS sent_by_username,
+               u2.id as sent_by_id
             FROM private_messages pm
             INNER JOIN users u ON (
                pm.from_user = ? AND pm.to_user = u.id
