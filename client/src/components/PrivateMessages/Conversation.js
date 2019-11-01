@@ -44,7 +44,7 @@ const Conversation = ({ id, username }) => {
             })}
          </div>
          <form className="form" onSubmit={onSubmit}>
-            <input type="text" value={content} onChange={e => setContent(e.target.value)} />
+            <input required type="text" value={content} onChange={e => setContent(e.target.value)} />
             <input type="submit" className="btn btn--primary" />
          </form>
       </div>
