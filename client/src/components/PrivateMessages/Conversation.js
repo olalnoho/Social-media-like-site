@@ -13,7 +13,7 @@ const Conversation = ({ id, username }) => {
    const [mark] = useMutation(markAsRead)
 
    useEffect(() => {
-      
+
       mark({
          variables: { id }, refetchQueries: () => [
             { query: getUniquePms }
@@ -21,11 +21,6 @@ const Conversation = ({ id, username }) => {
       })
       // Scroll to last messages
    }, [id, mark])
-   
-   useEffect(() => {
-      const msgBox = document.querySelector('.conversation__msgs')
-      msgBox.scrollTop = msgBox.scrollHeight
-   }, [data])
 
    const onSubmit = e => {
 
