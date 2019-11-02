@@ -28,9 +28,6 @@ const Conversation = ({ id, username }) => {
             const msgBox = document.querySelector('.conversation__msgs')
             const { scrollHeight: sh, offsetHeight: oh, scrollTop: st } = msgBox
             if (st + oh > sh - 150) {
-               console.log('adding', st + oh)
-               console.log('sh', sh)
-               console.log('ran')
                msgBox.scrollTop = sh
             }
          })
