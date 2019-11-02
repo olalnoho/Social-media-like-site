@@ -1,26 +1,44 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import getMsgs from '../../queries/getWholeConversation'
 import sendMsg from '../../queries/sendPrivateMessage'
 import markAsRead from '../../queries/markPmsAsRead'
 import getUniquePms from '../../queries/getPrivateMessages'
 import Spinner from '../UI/Spinner/Spinner'
+import { SocketContext } from '../../context/SocketContext'
+
 const Conversation = ({ id, username }) => {
    const [content, setContent] = useState('')
-
+   const { socket } = useContext(SocketContext)
    const [send] = useMutation(sendMsg)
-   const { data, loading } = useQuery(getMsgs, { variables: { id } })
+   const { data, loading, refetch } = useQuery(getMsgs, { variables: { id } })
    const [mark] = useMutation(markAsRead)
 
    useEffect(() => {
-
       mark({
          variables: { id }, refetchQueries: () => [
             { query: getUniquePms }
          ]
       })
-      // Scroll to last messages
    }, [id, mark])
+
+   useEffect(() => {
+      const refetchAndAutoScroll = () => {
+         refetch().then(_ => {
+            const msgBox = document.querySelector('.conversation__msgs')
+            const { scrollHeight: sh, offsetHeight: oh, scrollTop: st } = msgBox
+            if (st + oh > sh - 150) {
+               console.log('adding', st + oh)
+               console.log('sh', sh)
+               console.log('ran')
+               msgBox.scrollTop = sh
+            }
+         })
+      }
+      socket.on('updatePms', refetchAndAutoScroll)
+
+      return () => socket.off('updatePms', refetchAndAutoScroll)
+   }, [socket, username, refetch])
 
    const onSubmit = e => {
 
@@ -38,6 +56,7 @@ const Conversation = ({ id, username }) => {
          if (st + oh > sh - 150) {
             msgBox.scrollTop = sh
          }
+         socket.emit('newPms', username)
          setContent('')
       })
    }

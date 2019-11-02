@@ -31,6 +31,10 @@ module.exports = function (io) {
          io.in(username).emit('updateProfilePosts')
       })
 
+      socket.on('newPms', username => {
+         io.in(username).emit('updatePms')
+      })
+
       socket.on('logout', data => {
          delete onlineUsers[data]
          io.emit('updateOnlineData', onlineUsers)
