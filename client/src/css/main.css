@@ -287,8 +287,19 @@
 }
 
 .header__list--links {
+  position: relative;
   padding: 0.3rem;
   border-bottom: 2px solid transparent;
+}
+
+.header__list--links .unread {
+  position: absolute;
+  background-color: crimson;
+  top: 0;
+  left: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
 }
 
 .header button {

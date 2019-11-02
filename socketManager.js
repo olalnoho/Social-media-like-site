@@ -1,8 +1,9 @@
 module.exports = function (io) {
 
    const onlineUsers = {}
-   
+
    io.on('connection', socket => {
+      let socketname;
       io.emit('updateOnlineData', onlineUsers)
 
       socket.on('auth', data => {
@@ -17,6 +18,12 @@ module.exports = function (io) {
          // for notifying when new post on profile
          // or if you get a PM
          socket.join(username)
+
+         // @note
+         // notifications get its own room
+         // because other users might be in
+         // username room, for profile post updates
+         socket.join(username + 'notifications')
       })
 
       socket.on('joinProfileRoom', profileRoom => {
@@ -33,6 +40,14 @@ module.exports = function (io) {
 
       socket.on('newPms', username => {
          io.in(username).emit('updatePms')
+      })
+
+      socket.on('sendPMNotification', username => {
+         io.in(username + 'notifications').emit('PMNotification')
+      })
+
+      socket.on('sendProfileNotification', username => {
+         io.in(username + 'notifications').emit('profileNotification')
       })
 
       socket.on('logout', data => {

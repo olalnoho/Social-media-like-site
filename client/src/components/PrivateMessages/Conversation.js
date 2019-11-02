@@ -54,6 +54,7 @@ const Conversation = ({ id, username }) => {
             msgBox.scrollTop = sh
          }
          socket.emit('newPms', username)
+         socket.emit('sendPMNotification', username)
          setContent('')
       })
    }

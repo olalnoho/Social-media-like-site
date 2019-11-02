@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 import { AuthContext } from '../../../context/AuthContext'
 import { SocketContext } from '../../../context/SocketContext'
@@ -6,7 +6,26 @@ import { useApolloClient } from '@apollo/react-hooks'
 const Header = ({ authLoading, ...router }) => {
    const client = useApolloClient()
    const { isAuth, setIsAuth, setUserDetails, userDetails } = useContext(AuthContext)
+   const [pmNotification, setPmNotification] = useState(false)
+   const [profileNotification, setProfileNotification] = useState(false)
    const { socket } = useContext(SocketContext)
+
+   useEffect(() => {
+      const updateProfileNotification = () => {
+         if (!(router.location.pathname === '/profile')) {
+            setProfileNotification(true)
+         }
+      }
+      const updatePmNotification = () => {
+         if (!(router.location.pathname === '/private-messages')) {
+            setPmNotification(true)
+         }
+      }
+
+      socket.on('profileNotification', updateProfileNotification)
+      socket.on('PMNotification', updatePmNotification)
+   }, [socket, router.location])
+
    let links = (
       <>
          <li className="header__list--item">
@@ -27,11 +46,25 @@ const Header = ({ authLoading, ...router }) => {
             <li className="header__list--item">
                <NavLink className="header__list--links" exact to="/">Home</NavLink>
             </li>
-            <li className="header__list--item">
-               <NavLink className="header__list--links" exact to="/private-messages">PMs</NavLink>
+            <li onClick={e => {
+               if (pmNotification) {
+                  setPmNotification(false)
+               }
+            }} className="header__list--item">
+               <NavLink className="header__list--links" exact to="/private-messages">
+                  {pmNotification && <span className="unread"></span>}
+                  PMs
+               </NavLink>
             </li>
-            <li className="header__list--item">
-               <NavLink className="header__list--links" exact to="/profile">Profile</NavLink>
+            <li onClick={e => {
+               if (profileNotification) {
+                  setProfileNotification(false)
+               }
+            }} className="header__list--item">
+               <NavLink className="header__list--links" exact to="/profile">
+                  {profileNotification && <span className="unread"></span>}
+                  Profile
+               </NavLink>
             </li>
             <li className="header__list--item">
                <NavLink className="header__list--links" exact to="/msg-board">Message board</NavLink>
@@ -60,8 +93,7 @@ const Header = ({ authLoading, ...router }) => {
                {links}
             </ul>
          </nav>
-         </>
-         }
+         </>}
       </header>
    )
 }

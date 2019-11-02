@@ -18,6 +18,7 @@ const PostForm = ({ placeholder, profileId, username, setMoreResults }) => {
          }).then(_ => {
             setMessage('')
             socket.emit('newPost', username)
+            socket.emit('sendProfileNotification', username)
             setMoreResults(true)
          })
       }

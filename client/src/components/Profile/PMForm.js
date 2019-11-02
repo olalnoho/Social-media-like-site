@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { SocketContext } from '../../context/SocketContext'
 import { useMutation } from '@apollo/react-hooks'
 import sendPmMutation from '../../queries/sendPrivateMessage'
 
@@ -6,15 +7,16 @@ import Spinner from '../UI/Spinner/Spinner'
 const PMForm = ({ name, userId, setShowModal }) => {
    const [messageText, setMessageText] = useState('')
    const [sendPM, { loading }] = useMutation(sendPmMutation)
+   const { socket } = useContext(SocketContext)
    const sendMessage = e => {
       e.preventDefault()
       sendPM({ variables: { to: userId, content: messageText } })
          .then(_ => {
             setMessageText('')
             setShowModal(false)
+            socket.emit('sendPMNotification', name)
          })
    }
-
 
    if (loading) {
       return <div className="pm">
