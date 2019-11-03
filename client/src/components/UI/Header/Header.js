@@ -6,18 +6,27 @@ import { useApolloClient } from '@apollo/react-hooks'
 const Header = ({ authLoading, ...router }) => {
    const client = useApolloClient()
    const { isAuth, setIsAuth, setUserDetails, userDetails } = useContext(AuthContext)
-   const [pmNotification, setPmNotification] = useState(false)
-   const [profileNotification, setProfileNotification] = useState(false)
+  
+   const [pmNotification, setPmNotification] = useState(
+      localStorage.getItem('hasPmNotification') || false
+   )
+  
+   const [profileNotification, setProfileNotification] = useState(
+      localStorage.getItem('hasProfileNotification') || false
+   )
+  
    const { socket } = useContext(SocketContext)
 
    useEffect(() => {
       const updateProfileNotification = () => {
          if (!(router.location.pathname === '/profile')) {
+            localStorage.setItem('hasProfileNotification', true)
             setProfileNotification(true)
          }
       }
       const updatePmNotification = () => {
          if (!(router.location.pathname === '/private-messages')) {
+            localStorage.setItem('hasPmNotification', true)
             setPmNotification(true)
          }
       }
@@ -48,6 +57,7 @@ const Header = ({ authLoading, ...router }) => {
             </li>
             <li onClick={e => {
                if (pmNotification) {
+                  localStorage.removeItem('hasPmNotification')
                   setPmNotification(false)
                }
             }} className="header__list--item">
@@ -58,6 +68,7 @@ const Header = ({ authLoading, ...router }) => {
             </li>
             <li onClick={e => {
                if (profileNotification) {
+                  localStorage.removeItem('hasProfileNotification')
                   setProfileNotification(false)
                }
             }} className="header__list--item">

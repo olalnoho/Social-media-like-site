@@ -295,10 +295,11 @@
 .header__list--links .unread {
   position: absolute;
   background-color: crimson;
+  border: 1px solid blanchedalmond;
   top: 0;
   left: 0;
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 0.7rem;
+  height: 0.7rem;
   border-radius: 50%;
 }
 
