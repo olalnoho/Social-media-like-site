@@ -27,8 +27,8 @@ const Login = () => {
       setUserDetails(data.login.user)
       localStorage.setItem('token', data.login.token)
       // auth is for online list
-      // joinOwnRoom is for notifications
       socket.emit('auth', data.login.user)
+      // joinOwnRoom is for notifications
       socket.emit('joinOwnRoom', data.login.username)
       return <Redirect to="/" />
    }
