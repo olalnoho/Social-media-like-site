@@ -147,3 +147,42 @@
     }
   }
 }
+
+@media only screen and(max-width:1200px) {
+  .privatemessages {
+    &__msgs {
+      width: 100%;
+    }
+  }
+}
+@media only screen and(max-width:1000px) {
+  .conversationModal {
+    width: 80% !important;
+    height: 80% !important;
+  }
+  .privatemessages {
+    &__msgs {
+      &--msg {
+        grid-template-columns: 10rem 1fr;
+        img {
+          width: 10rem;
+          height: 10rem;
+        }
+      }
+    }
+  }
+}
+@media only screen and(max-width:700px) {
+  .privatemessages {
+    width: 100%;
+    &__msgs {
+      width: 100%;
+      &--msg {
+        width: 100%;
+        button {
+          width: 90%;
+        }
+      }
+    }
+  }
+}

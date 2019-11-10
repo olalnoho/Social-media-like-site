@@ -1316,6 +1316,18 @@
   .messageboard__messages--msg p {
     padding: 1rem 1rem;
   }
+  .messageboard__messages button {
+    background-color: crimson;
+    margin: auto;
+    margin-top: 2rem;
+    width: 60%;
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 1;
+    grid-row: 3/4;
+  }
+  .messageboard__messages button:hover {
+    background-color: #960e29;
+  }
 }
 
 .conversationModal {
@@ -1522,6 +1534,42 @@
 
 .privatemessages__msgs--msg button:hover {
   background-color: #105c31;
+}
+
+@media only screen and (max-width: 1200px) {
+  .privatemessages__msgs {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .conversationModal {
+    width: 80% !important;
+    height: 80% !important;
+  }
+  .privatemessages__msgs--msg {
+    -ms-grid-columns: 10rem 1fr;
+        grid-template-columns: 10rem 1fr;
+  }
+  .privatemessages__msgs--msg img {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .privatemessages {
+    width: 100%;
+  }
+  .privatemessages__msgs {
+    width: 100%;
+  }
+  .privatemessages__msgs--msg {
+    width: 100%;
+  }
+  .privatemessages__msgs--msg button {
+    width: 90%;
+  }
 }
 
 .Loader {

@@ -3,7 +3,6 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { SocketContext } from '../../context/SocketContext'
 import messageQuery from '../../queries/getMessages'
 import messageMutation from '../../queries/createMessage'
-// import deleteMessageMutation from '../../queries/deleteMessage'
 
 import Spinner from '../UI/Spinner/Spinner'
 import Message from './Message'
