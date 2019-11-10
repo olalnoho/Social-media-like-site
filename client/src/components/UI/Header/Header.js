@@ -6,15 +6,15 @@ import { useApolloClient } from '@apollo/react-hooks'
 const Header = ({ authLoading, ...router }) => {
    const client = useApolloClient()
    const { isAuth, setIsAuth, setUserDetails, userDetails } = useContext(AuthContext)
-  
+
    const [pmNotification, setPmNotification] = useState(
       localStorage.getItem('hasPmNotification') || false
    )
-  
+
    const [profileNotification, setProfileNotification] = useState(
       localStorage.getItem('hasProfileNotification') || false
    )
-  
+
    const { socket } = useContext(SocketContext)
 
    useEffect(() => {
@@ -33,6 +33,11 @@ const Header = ({ authLoading, ...router }) => {
 
       socket.on('profileNotification', updateProfileNotification)
       socket.on('PMNotification', updatePmNotification)
+
+      return () => {
+         socket.off('profileNotification', updateProfileNotification)
+         socket.off('PMNotification', updatePmNotification)
+      }
    }, [socket, router.location])
 
    let links = (
