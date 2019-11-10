@@ -24,9 +24,12 @@ const Login = () => {
 
    if (data) {
       setIsAuth(true)
-      localStorage.setItem('token', data.login.token)
       setUserDetails(data.login.user)
+      localStorage.setItem('token', data.login.token)
+      // auth is for online list
+      // joinOwnRoom is for notifications
       socket.emit('auth', data.login.user)
+      socket.emit('joinOwnRoom', data.login.username)
       return <Redirect to="/" />
    }
 
