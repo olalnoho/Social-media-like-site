@@ -3,7 +3,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { SocketContext } from '../../context/SocketContext'
 import messageQuery from '../../queries/getMessages'
 import messageMutation from '../../queries/createMessage'
-import deleteMessageMutation from '../../queries/deleteMessage'
+// import deleteMessageMutation from '../../queries/deleteMessage'
 
 import Spinner from '../UI/Spinner/Spinner'
 import Message from './Message'
@@ -80,7 +80,7 @@ const MessageBoard = () => {
                   required
                   onChange={e => setMessageText(e.target.value)} />
                <input type="submit" className="btn btn--primary" value="Send message" />
-               {(messageLoading || sendLoading || deleteLoading) && <Spinner />}
+               {(messageLoading || sendLoading) && <Spinner />}
             </form>
 
             {(sendError || messageError) && <div className="alert" style={{ textAlign: 'center' }}> Something went wrong, try again.</div>}
