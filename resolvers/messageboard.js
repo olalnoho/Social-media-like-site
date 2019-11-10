@@ -30,7 +30,11 @@ module.exports = {
          return message[0]
       },
 
+<<<<<<< HEAD
       async deleteMessage(parent, { id }, { req, db, io }) {
+=======
+      async deleteMessage(parent, { id }, { req, db }) {
+>>>>>>> 30731cda84a22e4fe276718a5bc4e9473a496eb4
          const userId = getUserId(req.req)
          const msg = await db('message_board')
             .delete()
@@ -40,8 +44,12 @@ module.exports = {
          if (!msg.length) {
             throw new Error('Message not found')
          }
+<<<<<<< HEAD
          
          io.emit('message_update')
+=======
+
+>>>>>>> 30731cda84a22e4fe276718a5bc4e9473a496eb4
          return msg[0]
       }
    }

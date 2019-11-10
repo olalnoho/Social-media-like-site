@@ -49,6 +49,7 @@
     margin-top: 5rem;
 
     &--msg {
+<<<<<<< HEAD
       @extend %messageBox;
     }
   }
@@ -59,6 +60,26 @@
     width: 80%;
   }
 }
+=======
+      margin: 2rem auto 5rem auto;
+      width: 80%;
+      padding: 2rem 1rem;
+      background-color: $main-lighter;
+      min-height: 20rem;
+      border: 0.2rem solid blanchedalmond;
+      display: grid;
+      grid-template-rows: min-content 10rem min-content max-content;
+      grid-template-columns: 15rem 1fr;
+
+      img {
+        justify-self: center;
+        align-self: center;
+        height: 100%;
+        max-width: 100%;
+        grid-row: 2/3;
+        grid-column: 1/2;
+      }
+>>>>>>> 30731cda84a22e4fe276718a5bc4e9473a496eb4
 
 @media only screen and(max-width:1000px) {
   .messageboard {
@@ -136,6 +157,17 @@
         }
         p {
           padding: 1rem 1rem;
+        }
+      }
+      button {
+        background-color: crimson;
+        margin: auto;
+        margin-top: 2rem;
+        width: 60%;
+        grid-row: 3/4;
+
+        &:hover {
+          background-color: darken(crimson, 15%);
         }
       }
     }
