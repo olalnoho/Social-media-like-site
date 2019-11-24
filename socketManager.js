@@ -13,7 +13,6 @@ module.exports = function (io) {
       })
 
       socket.on('joinOwnRoom', username => {
-         console.log(username)
          // @note
          // For updating profile when a new post get added.
          socket.join(username)
