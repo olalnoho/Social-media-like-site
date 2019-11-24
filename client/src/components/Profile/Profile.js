@@ -12,6 +12,7 @@ import ProfilePost from './ProfilePost'
 import PostForm from './PostForm'
 
 const Profile = ({ authLoading }) => {
+   console.log('ranm')
    const [limit, setLimit] = useState(5)
    const { data, loading: profileLoading, error } = useQuery(getProfile)
    const [moreResults, setMoreResults] = useState(true)
@@ -20,7 +21,9 @@ const Profile = ({ authLoading }) => {
    const [profileMsgQuery, { data: profileMsgQueryData, refetch, fetchMore }] = useLazyQuery(getProfilePosts)
 
    useEffect(() => {
+      console.log('ran')
       if (data && data.getProfile !== null) {
+         console.log('in if')
          profileMsgQuery({
             variables: {
                id: data.getProfile.id,
@@ -30,6 +33,8 @@ const Profile = ({ authLoading }) => {
          })
       }
    }, [data, profileMsgQuery])
+
+   console.log(profileMsgQueryData)
 
    useEffect(() => {
       const refetchAndUpdate = () => {

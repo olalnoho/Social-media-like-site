@@ -15,7 +15,7 @@ const http = app.listen(4000)
 const io = require('socket.io')(http)
 
 const server = new ApolloServer({
-   playground: true,
+   playground: false,
    typeDefs,
    resolvers,
    context: req => ({ req, db, io })

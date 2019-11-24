@@ -29,7 +29,8 @@ const Login = () => {
       // auth is for online list
       socket.emit('auth', data.login.user)
       // joinOwnRoom is for notifications
-      socket.emit('joinOwnRoom', data.login.username)
+      console.log(data)
+      socket.emit('joinOwnRoom', data.login.user.username)
       return <Redirect to="/" />
    }
 

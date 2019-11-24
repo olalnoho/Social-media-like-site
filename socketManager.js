@@ -13,10 +13,9 @@ module.exports = function (io) {
       })
 
       socket.on('joinOwnRoom', username => {
+         console.log(username)
          // @note
-         // you should always be in your own room
-         // for notifying when new post on profile
-         // or if you get a PM
+         // For updating profile when a new post get added.
          socket.join(username)
 
          // @note
