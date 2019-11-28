@@ -224,6 +224,9 @@
   .landing__left {
     margin-bottom: 4rem;
   }
+  .landing__left p {
+    text-align: center;
+  }
   .landing__right {
     width: 70%;
   }
