@@ -724,6 +724,9 @@
 }
 
 .profile .avatar {
+  max-height: 20rem;
+  -o-object-fit: contain;
+     object-fit: contain;
   height: 80%;
   width: auto;
   border-radius: 10%;

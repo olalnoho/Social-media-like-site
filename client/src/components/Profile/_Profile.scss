@@ -75,6 +75,8 @@
   }
 
   .avatar {
+    max-height: 20rem;
+    object-fit: contain;
     height: 80%;
     width: auto;
     border-radius: 10%;
