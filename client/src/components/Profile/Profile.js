@@ -17,7 +17,7 @@ const Profile = ({ authLoading }) => {
    const [moreResults, setMoreResults] = useState(true)
    const { isAuth, userDetails } = useContext(AuthContext)
    const { socket } = useContext(SocketContext)
-   const [profileMsgQuery, { data: profileMsgQueryData, refetch, fetchMore }] = useLazyQuery(getProfilePosts)
+   const [profileMsgQuery, { data: profileMsgQueryData, refetch, fetchMore }] = useLazyQuery(getProfilePosts, { fetchPolicy: 'network-only' })
 
    useEffect(() => {
       if (data && data.getProfile !== null) {
