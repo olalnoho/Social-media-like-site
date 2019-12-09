@@ -1,7 +1,7 @@
-// Third party libs
+const path = require('path')
+
 const { ApolloServer } = require('apollo-server-express')
 const express = require('express')
-
 
 // Database and GraphQL stuff
 const db = require('./db/db')
@@ -11,7 +11,9 @@ const resolvers = require('./resolvers/root')
 // Socket stuff
 const socketManager = require('./socketManager')
 const app = express()
-const http = app.listen(4000)
+const http = app.listen(
+   process.env.PORT || 4000
+)
 const io = require('socket.io')(http)
 
 const server = new ApolloServer({
@@ -22,5 +24,12 @@ const server = new ApolloServer({
 })
 
 socketManager(io)
+
+if(process.env.NODE_ENV === 'production') {
+   app.use(express.static(path.resolve('client', 'build')))
+   app.get('*', (req, res) => {
+      res.sendFile(path.resolve('client', 'build', 'index.html'))
+   })
+}
 
 server.applyMiddleware({ app })
