@@ -5,7 +5,7 @@ export const SocketContext = React.createContext({
    socket: null
 })
 
-const socket = io('http://localhost:4000')
+const socket = io('https://alho-socialmedia.herokuapp.com/')
 
 export default props => {
    const [onlineList, setOnlineList] = useState({})
