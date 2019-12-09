@@ -1265,6 +1265,7 @@
   }
   .messageboard__messages--msg a,
   .messageboard__messages--msg h2 {
+    word-break: break-all;
     -ms-grid-column-align: center;
         justify-self: center;
     padding: 0;
