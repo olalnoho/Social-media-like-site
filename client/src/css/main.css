@@ -907,8 +907,8 @@
   -ms-flex-item-align: start;
       -ms-grid-row-align: start;
       align-self: start;
-  -ms-grid-column-align: start;
-      justify-self: start;
+  -ms-grid-column-align: center;
+      justify-self: center;
   margin-bottom: 1rem;
 }
 
@@ -1225,6 +1225,11 @@
   margin-top: 5rem;
 }
 
+.messageboard__messages--msg img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 @media only screen and (max-width: 1200px) {
   .messageboard {
     width: 80%;
@@ -1512,6 +1517,11 @@
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
+}
+
+.privatemessages__msgs--msg img {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .privatemessages__msgs--msg span {
