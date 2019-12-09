@@ -12,7 +12,7 @@ const resolvers = require('./resolvers/root')
 const socketManager = require('./socketManager')
 const app = express()
 const http = app.listen(
-   process.env.PORT || 4000
+   process.env.PORT || 5000
 )
 const io = require('socket.io')(http)
 
