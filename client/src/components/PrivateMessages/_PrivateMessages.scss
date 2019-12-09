@@ -128,6 +128,11 @@
         grid-column: 2/3;
       }
 
+      h3 {
+        margin: 0;
+        word-break: break-all;
+      }
+
       p {
         white-space: pre-line;
         grid-row: 2/-2;
@@ -163,7 +168,7 @@
   .privatemessages {
     &__msgs {
       &--msg {
-        grid-template-columns: 10rem 1fr;
+        grid-template-columns: 30% 1fr;
         img {
           width: 10rem;
           height: 10rem;
