@@ -102,7 +102,7 @@ const Header = ({ authLoading, ...router }) => {
       <header className="header">
          <div className="header__info">
             <Link to="/"><i className="fab fa-centos"></i></Link>
-            <h2>Bestest site ever</h2>
+            <h2>YourSpace</h2>
          </div>
          {!authLoading && <><nav className="header__nav">
             <ul className="header__list">
