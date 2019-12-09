@@ -122,6 +122,10 @@
 
       grid-template-rows: repeat(4, min-content);
       grid-template-columns: 20rem 1fr;
+
+      img {
+        object-fit: contain;
+      }
       span {
         font-weight: bold;
         grid-row: 1/2;

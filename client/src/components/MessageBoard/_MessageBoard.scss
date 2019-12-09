@@ -50,6 +50,9 @@
 
     &--msg {
       @extend %messageBox;
+      img {
+        object-fit: contain;
+      }
     }
   }
 }

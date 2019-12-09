@@ -21,10 +21,6 @@ import MessageBoard from './components/MessageBoard/MessageBoard';
 import OtherProfile from './components/Profile/OtherProfile';
 import PrivateMessages from './components/PrivateMessages/PrivateMessages';
 
-// @note
-// remeber to change the preload
-// in the html file before deploying
-
 const App = () => {
 
   const { setIsAuth, setUserDetails } = useContext(AuthContext)
