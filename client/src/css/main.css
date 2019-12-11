@@ -134,15 +134,16 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
 .landing__left {
+  margin-right: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -153,6 +154,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.landing__right {
+  margin-left: 2rem;
 }
 
 .landing__buttongroup {
