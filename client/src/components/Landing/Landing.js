@@ -21,10 +21,9 @@ const Landing = ({ authLoading }) => {
 
    let text = (
       <>
-         <h1 className="heading-1">Join us!</h1>
+         <h1 className="heading-1">Join us</h1>
          <p className="lead">
-            Just some cool text to get you to join this website.
-            Please...
+            Connect with old friends; or find new ones!
          </p>
       </>
    )

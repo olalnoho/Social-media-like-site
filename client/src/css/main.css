@@ -176,8 +176,11 @@
   border: .3rem solid #bbb4b7;
   color: white;
   font-size: 2.4rem;
-  margin-bottom: 1rem;
   font-family: inherit;
+}
+
+.landing__buttongroup a:not(:last-child) {
+  margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 1000px) {

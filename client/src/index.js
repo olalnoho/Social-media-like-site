@@ -10,7 +10,6 @@ import SocketContextProvider from './context/SocketContext'
 
 const client = new ApolloClient({
    uri: '/graphql',
-   // uri: 'http://localhost:4000/graphql',
    request: operation => {
       const token = localStorage.getItem('token')
       operation.setContext({
