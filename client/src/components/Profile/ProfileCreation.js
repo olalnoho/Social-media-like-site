@@ -68,7 +68,7 @@ const ProfileCreation = () => {
                   placeholder="A little about you..."
                   onChange={e => setFormData({ ...formData, bio: e.target.value })}
                />
-               <input type="submit" className="btn btn--thirdary" placeholder="Submit" />
+               <input type="submit" className="btn btn--thirdary" value="Submit" />
             </form>
          </div>
       </div>

@@ -75,7 +75,7 @@ const Conversation = ({ id, username }) => {
          </div>
          <form className="form" onSubmit={onSubmit}>
             <input required type="text" value={content} onChange={e => setContent(e.target.value)} />
-            <input type="submit" className="btn btn--primary" />
+            <input type="submit" value="Send" className="btn btn--primary" />
          </form>
       </div>
    )

@@ -67,7 +67,7 @@ const EditProfile = ({ location, authLoading }) => {
                   placeholder="A little about you..."
                   onChange={e => setFormData({ ...formData, bio: e.target.value })}
                />
-               <input type="submit" className="btn btn--thirdary" placeholder="Submit" />
+               <input type="submit" value="Submit" className="btn btn--thirdary" />
             </form>
          </div>
       </div>
