@@ -51,7 +51,7 @@ const Login = () => {
                type="password"
                placeholder="Password"
                onChange={e => setPassword(e.target.value)} />
-            <input type="submit" className="btn btn--thirdary" />
+            <input type="submit" value="Submit" className="btn btn--thirdary" />
          </form>
       </div>
    )

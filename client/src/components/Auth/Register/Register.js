@@ -51,7 +51,7 @@ const Register = () => {
                type="password"
                placeholder="Password"
                onChange={e => setFormData({ ...formData, password: e.target.value })} />
-            <input type="submit" className="btn btn--thirdary" />
+            <input type="submit" value="Submit" className="btn btn--thirdary" />
          </form>
       </div>
    )
