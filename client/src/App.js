@@ -1,6 +1,6 @@
 // 3rd party
 import React, { useEffect, useContext, useState } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 
 // Context
@@ -55,6 +55,7 @@ const App = () => {
         <Route path="/edit-profile" component={props => <EditProfile {...props} authLoading={initLoad} />} />
         <Route path="/msg-board" component={MessageBoard} />
         <Route path="/private-messages" component={PrivateMessages} />
+        <Redirect to="/" />
         {/* <Route path="/profile-creation" component={ProfileCreation} /> */}
       </Switch>
     </>
